@@ -228,7 +228,9 @@
         <script type="text/javascript">
     const headerShadow = () => {
         var header = document.getElementById("login-navbar");
+        var header_mobile = document.getElementById("login-navbar_mobile");
         var button = document.getElementById("btn-back-to-top");
+        var button_mobile = document.getElementById("btn-back-to-top_mobile");
         var buttonChat = document.getElementById("chatButton");
         // When the user clicks on the button, scroll to the top of the document
         button.addEventListener("click", backToTop);
@@ -240,11 +242,15 @@
 
         if (window.pageYOffset > sticky) {
             header.classList.add("add-shadow");
+            header_mobile.classList.add("add-shadow");
             button.classList.remove("default-btn-back-to-top");
+            button_mobile.classList.remove("default-btn-back-to-top");
             buttonChat.classList.remove("default-btn-back-to-top");
         } else {
             header.classList.remove("add-shadow");
+            header_mobile.classList.remove("add-shadow");
             button.classList.add("default-btn-back-to-top");
+            button_mobile.classList.add("default-btn-back-to-top");
             buttonChat.classList.add("default-btn-back-to-top");
         }
     };
