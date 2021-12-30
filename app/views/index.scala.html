@@ -270,10 +270,22 @@
         <script src='@routes.Assets.versioned("/static/bootstrap.js?timestamp=1589805552695")' type="text/javascript"></script>
 
         <script>
+                   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                   var desktopView = document.getElementById("desktopView");
+                   var mobile_view = document.getElementById("mobile_view");
+                   console.log(isMobile);
+                   if (isMobile) {
+                       desktopView.classList.add("hide-mobile");
+                   }else{
+                       mobile_view.classList.add("hide-mobile");
+
+                   }
+
             function myFunction() {
                // location.reload();
             }
             //    $('#exampleModal').modal('hide'); console.log("dd");
+
 
         </script>
 

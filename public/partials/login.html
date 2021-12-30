@@ -156,8 +156,12 @@
 </style>
 
 
-
-<div ng-show='isMobile()'>
+<style>
+    .hide-mobile{
+        display: none;
+    }
+</style>
+<div id="mobile_view" ng-show='isMobile()'>
     <div id="btn-back-to-top_mobile" class="fab-container default-btn-back-to-top">
         <div class="button iconbutton">
             <i class="fa-solid fa-plus " style=" background-image: url('/assets/images/up-icon2.png');height: 80px;width: 80px;text-align: center"></i>
@@ -600,7 +604,7 @@
 
 
 
-<div ng-show='!isMobile()' >
+<div id="desktopView" ng-show='!isMobile()' >
 
     <div id="btn-back-to-top" class="fab-container default-btn-back-to-top">
         <div class="button iconbutton">
@@ -763,7 +767,7 @@
             }
         </style>
         <nav id="login-navbar" style="position: fixed;width: 100%;z-index: 100;background-color: white;padding: 0px;padding-right: 8em"  class="navbar navbar-expand-md navbar-dark">
-            <a class="navbar-brand mx-auto" href="#"><img style="margin-top: 0.1em;margin-bottom: 0.1em" class='ivo-hide' id="logoImg" src="/assets/images/logo_makeydata.png" height="60" alt=""></a>
+            <a class="navbar-brand mx-auto" href="#"><img style="margin-top: 0.3em;margin-bottom: 0.3em" class='ivo-hide' id="logoImg" src="/assets/images/logo_makeydata.png" height="50" alt=""></a>
             <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target=".dual-collapse2">
                 <span style="color: black" class="navbar-toggler-icon"></span>
             </button>
