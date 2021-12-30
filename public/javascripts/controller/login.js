@@ -241,8 +241,18 @@ function( $scope, BASE_URL, $state, $rootScope, $stateParams, authService, crede
         const rect = contactUsPos.getBoundingClientRect();
         window.scroll({ top: rect.top-30+window.scrollY, behavior: 'smooth' });
     }
+    $scope.goToContactUsMobile = function() {
+        var contactUsPos = document.getElementById( 'contactUsElementM' );
+        const rect = contactUsPos.getBoundingClientRect();
+        window.scroll({ top: rect.top-30+window.scrollY, behavior: 'smooth' });
+    }
     $scope.goToServices = function() {
         var servicesPos = document.getElementById( 'servicesElements' );
+        const rect = servicesPos.getBoundingClientRect();
+        window.scroll({ top: rect.top-120+window.scrollY, behavior: 'smooth' });
+    }
+    $scope.goToServicesMobile = function() {
+        var servicesPos = document.getElementById( 'servicesElementsM' );
         const rect = servicesPos.getBoundingClientRect();
         window.scroll({ top: rect.top-120+window.scrollY, behavior: 'smooth' });
     }
@@ -251,8 +261,18 @@ function( $scope, BASE_URL, $state, $rootScope, $stateParams, authService, crede
         const rect = videoPos.getBoundingClientRect();
         window.scroll({ top: rect.top-120+window.scrollY, behavior: 'smooth' });
     }
+    $scope.goToVideosMobile = function() {
+        var videoPos = document.getElementById( 'videoElementsM' );
+        const rect = videoPos.getBoundingClientRect();
+        window.scroll({ top: rect.top-120+window.scrollY, behavior: 'smooth' });
+    }
     $scope.goToComments = function() {
         var commentsPos = document.getElementById( 'commentsElement' );
+        const rect = commentsPos.getBoundingClientRect();
+        window.scroll({ top: rect.top+window.scrollY, behavior: 'smooth' });
+    }
+    $scope.goToCommentsMobile = function() {
+        var commentsPos = document.getElementById( 'commentsElementM' );
         const rect = commentsPos.getBoundingClientRect();
         window.scroll({ top: rect.top+window.scrollY, behavior: 'smooth' });
     }

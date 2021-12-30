@@ -111,7 +111,7 @@
         transition-duration: 0.5s;
         visibility: hidden;
         opacity: 0.0;
-    /*    display: none;*/
+        /*    display: none;*/
     }
     .btn-back-to-top-invisible{
         display: none;
@@ -158,24 +158,42 @@
 
 
 <div ng-show='isMobile()'>
-    <nav style="position: fixed;width: 100%;z-index: 100;background-color: white"  class="navbar navbar-expand-md navbar-dark">
-        <a class="navbar-brand mx-auto" href="#"><img style="margin-bottom: 1em" class='ivo-hide' id="logoImg" src="/assets/images/logo_makeydata.png" height="60" alt=""></a>
+    <div id="btn-back-to-top_mobile" class="fab-container default-btn-back-to-top">
+        <div class="button iconbutton">
+            <i class="fa-solid fa-plus " style=" background-image: url('/assets/images/up-icon2.png');height: 80px;width: 80px;text-align: center"></i>
+        </div>
+    </div>
+
+    <nav id="login-navbar_mobile" style="position: fixed;width: 100%;z-index: 100;padding-left: 0em;padding-right: 0em;background-color: white"  class="navbar navbar-expand-md navbar-dark">
+        <a class="" href="#"><img style="margin-left: 2em" class='ivo-hide' id="logoImg" src="/assets/images/logo-icon-mobile.png" height="60" alt=""></a>
         <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target=".dual-collapse2">
             <span style="color: black" class="navbar-toggler-icon"></span>
         </button>
-        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a id= "contactUsBtn" ng-click="goToContactUs()" href="#" style="font-family: 'Source Sans Pro SemiBold';font-size: 18px;margin-right: 3em;text-decoration: none;color:black;">Contact us</a>
+        <div style="background-color: #F9C82D" class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul style="" class="navbar-nav ml-auto">
+                <li style="height: 35px;margin-top: 35px;margin-left: 36px" class="nav-item">
+                    <a id= "contactUsBtn" ng-click="goToContactUsMobile()" href="#" style="font-family: 'Source Sans Pro SemiBold';font-size: 18px;margin-right: 3em;text-decoration: none;color:white;">Contact us</a>
+                    <div style="background-color: #707070;height: 0.1em;width: 75%;text-align: center;margin-top: 17px">
+
+                    </div>
                 </li>
-                <li class="nav-item">
-                    <a href="#" style="font-family: 'Source Sans Pro SemiBold';font-size: 18px;margin-right: 3em;text-decoration: none;color:black;">Services</a>
+
+                <li style="height: 35px;margin-top: 35px;margin-left: 36px" class="nav-item">
+
+                    <a href="#" ng-click="goToServicesMobile()" style="font-family: 'Source Sans Pro SemiBold';font-size: 18px;margin-right: 3em;text-decoration: none;color:black;color:white;">Services</a>
+                    <div style="background-color: #707070;height: 0.1em;width: 75%;text-align: center;margin-top: 17px">
+
+                    </div>
                 </li>
-                <li class="nav-item">
-                    <a href="#" style="font-family: 'Source Sans Pro SemiBold';font-size: 18px;margin-right: 3em; text-decoration: none;color:black;">Videos</a>
+                <li style="height: 35px;margin-top: 35px;margin-left: 36px" class="nav-item">
+                    <a href="#" ng-click="goToVideosMobile()"   style="font-family: 'Source Sans Pro SemiBold';font-size: 18px;margin-right: 3em; text-decoration: none;color:black;color:white;">Videos</a>
+                    <div style="background-color: #707070;height: 0.1em;width: 75%;text-align: center;margin-top: 17px">
+
+                    </div>
                 </li>
-                <li class="nav-item">
-                    <a href="#" style="font-family: 'Source Sans Pro SemiBold';font-size: 18px;text-decoration: none;color:black;">Comments</a>
+                <li style="height: 35px;margin-top: 35px;margin-bottom: 35px;margin-left: 36px" class="nav-item">
+                    <a href="#" ng-click="goToCommentsMobile()" style="font-family: 'Source Sans Pro SemiBold';font-size: 18px;text-decoration: none;color:black;color:white;">Comments</a>
+
                 </li>
             </ul>
         </div>
@@ -363,7 +381,7 @@
     </div>
     <br>
     <br>
-    <div class="container">
+    <div  id= "servicesElementsM"  class="container">
         <div class="row">
             <img class='ivo-hide' src="/assets/images/group-icon.png" height="28" alt=""> <p class="login-text" style="font-size: 20px;margin-left: 0.5em;">Need Marketing Software?</p>
         </div>
@@ -432,7 +450,7 @@
     </div>
     <br>
     <br>
-    <div style="text-align: center">
+    <div id="videoElementsM" style="text-align: center">
         <p style="font-size: 20px;font-family: 'Source Sans Pro SemiBold';color: black">Learn About the Homeowner Database</p>
     </div>
 
@@ -493,7 +511,7 @@
     </div>
     <br>
     <br>
-    <div class="container">
+    <div id= "contactUsElementM" class="container">
         <div class="row">
             <div style="margin-top: 1em" class="col col-lg-12">
                 <p style="color: #707070;font-size: 39px;font-family: 'Source Sans Pro SemiBold';">Contact us</p>
@@ -518,6 +536,63 @@
             </div>
         </div>
     </div>
+    <br>
+    <div id="commentsElementM" class="container" style="margin-top: 12px">
+        <div class="row" style="height: 0.1em;background-color: #788084; ">
+        </div>
+    </div>
+    <br>
+    <br>
+    <div  class="container">
+        <div class="row">
+
+            <div style="text-align: center"  class="col col-lg-12">
+
+                <button data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"  class="login-button" style="margin-right: -0.3em; width:50px; font-size: 18px;color: white;font-family: 'Source Sans Pro SemiBold'">-</button>
+                <button class="login-button" style="margin-left: 0px;background-color: #707070; font-size: 18px;color: white;font-family: 'Source Sans Pro SemiBold'">Comments</button>
+
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+
+
+
+    <div class="container">
+        <div class="row">
+            <div id="collapseExample" class='comments collapse' ng-class="{'border-bottom': comments.indexOf(comment) != comments.length - 1}" ng-repeat="comment in comments">
+                <p style="font-family: 'Source Sans Pro SemiBold'; line-height: 0px; font-size: 20px;color: #707070" class='comment-name'>{{comment.name}}</p>
+                <p style="font-family: 'Source Sans Pro'; line-height: 5px; font-size: 18px;color: #707070"  class='comment-value'>{{comment.comment}}</p>
+                <p style="font-family: 'Source Sans Pro'; font-size: 18px;color: #707070"  class='comment-date'>{{comment.date | date: 'MM/dd/yyyy HH:mm'}}</p>
+
+                <div style="margin-left: 2em" ng-if='comment.answer' class='comment-answer'>
+                    <p style="font-family: 'Source Sans Pro SemiBold';font-style: italic; font-size: 20px;color: #707070" class='comment-name'>Seller's response</p>
+                    <p style="font-style: italic;font-family: 'Source Sans Pro';line-height: 5px;color: #707070;font-size: 20px;" class='comment-value'>{{comment.answer}}</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div style="background-color: #3B3B3B;border: #3B3B3B;border-style: solid;border-width: 1px;height: 322px">
+        <br>
+        <br>
+        <br>
+        <div class="container">
+            <div class="row">
+                <div style="text-align: center" class="col col-lg-4">
+                </div>
+                <div style="text-align: center" class="col col-lg-4">
+                    <img style="margin-bottom: 1em" class='ivo-hide' src="/assets/images/logo-icon.png" height="174" alt="">
+                </div>
+                <div style="text-align: center" class="col col-lg-4">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div/>
 </div>
 </div>
@@ -687,15 +762,15 @@
                 background-image: url('/assets/images/menu-icon.png');
             }
         </style>
-        <nav id="login-navbar" style="position: fixed;width: 100%;z-index: 100;background-color: white"  class="navbar navbar-expand-md navbar-dark">
-            <a class="navbar-brand mx-auto" href="#"><img style="margin-bottom: 1em" class='ivo-hide' id="logoImg" src="/assets/images/logo_makeydata.png" height="60" alt=""></a>
+        <nav id="login-navbar" style="position: fixed;width: 100%;z-index: 100;background-color: white;padding: 0px;padding-right: 8em"  class="navbar navbar-expand-md navbar-dark">
+            <a class="navbar-brand mx-auto" href="#"><img style="margin-top: 0.1em;margin-bottom: 0.1em" class='ivo-hide' id="logoImg" src="/assets/images/logo_makeydata.png" height="60" alt=""></a>
             <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target=".dual-collapse2">
                 <span style="color: black" class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                         <a id= "contactUsBtn2" ng-click="goToContactUs()" href="#" style="font-family: 'Source Sans Pro SemiBold';font-size: 18px;margin-right: 3em;text-decoration: none;color:black;">Contact us</a>
+                        <a id= "contactUsBtn2" ng-click="goToContactUs()" href="#" style="font-family: 'Source Sans Pro SemiBold';font-size: 18px;margin-right: 3em;text-decoration: none;color:black;">Contact us</a>
                     </li>
                     <li class="nav-item">
                         <a ng-click="goToServices()" href="#" style="font-family: 'Source Sans Pro SemiBold';font-size: 18px;margin-right: 3em;text-decoration: none;color:black;">Services</a>
@@ -886,10 +961,12 @@
     <br>
     <br>
     <br>
-    <div style="background-image: url('/assets/images/group_2.png');background-size: cover; height: 600px">
-        <div class="container">
-            <p style="text-align: center;color: black;font-size: 39px;font-family: 'Source Sans Pro';">Click <strong style="color: #F9C82D;font-family: 'Source Sans Pro SemiBold'">Live Chat </strong> to Speak With Our Helpful</p>
-            <p style="text-align: center;color: black;font-size: 39px;font-family: 'Source Sans Pro';">Make My Data Support Team Now</p>
+    <div style="padding-right: 1.5em;padding-left: 1.5em">
+        <div style="background-image: url('/assets/images/group_2.png');background-size: cover; height: 600px">
+            <div class="container">
+                <p style="text-align: center;color: black;font-size: 39px;font-family: 'Source Sans Pro';">Click <strong style="color: #F9C82D;font-family: 'Source Sans Pro SemiBold'">Live Chat </strong> to Speak With Our Helpful</p>
+                <p style="text-align: center;color: black;font-size: 39px;font-family: 'Source Sans Pro';">Make My Data Support Team Now</p>
+            </div>
         </div>
     </div>
     <br>
