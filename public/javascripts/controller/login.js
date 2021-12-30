@@ -130,6 +130,7 @@ function( $scope, BASE_URL, $state, $rootScope, $stateParams, authService, crede
                     } else {
                         $rootScope.$broadcast('LOGGED_IN');
                         $state.transitionTo( 'main' );
+                        location.reload();
                     }
                 } else {
                     if ( md.mobile() ) {
