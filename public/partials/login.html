@@ -1,8 +1,12 @@
 <style>
     @media only screen and (max-width: 480px) {
+
         #img_sect_1{
             height: 300px;
             width: auto;
+        }
+        #desktopView{
+            display: none;
         }
         #section_1_img{
             text-align: center;
@@ -23,6 +27,9 @@
     @media only screen and (min-width: 480px) {
         #section_1_txt_title{
             margin-left: 130px;
+        }
+        #mobile_view{
+            display: none;
         }
         #logoImg{
             margin-left: 4em;
@@ -157,15 +164,18 @@
 
 
 <style>
+    /*
     .hide-mobile{
         display: none;
     }
     .invisible{
         visibility: hidden;
     }
+
+     */
 </style>
 
-<div  id="mobile_view" class="hide-mobile invisible">
+<div  id="mobile_view" class="">
     <div id="btn-back-to-top_mobile" class="fab-container default-btn-back-to-top">
         <div class="button iconbutton">
             <i class="fa-solid fa-plus " style=" background-image: url('/assets/images/up-icon2.png');height: 80px;width: 80px;text-align: center"></i>
@@ -608,7 +618,7 @@
 
 
 
-<div id="desktopView" class="hide-mobile invisible" ng-show='!isMobile()' >
+<div id="desktopView" class="" ng-show='!isMobile()' >
 
     <div id="btn-back-to-top" class="fab-container default-btn-back-to-top">
         <div class="button iconbutton">
