@@ -201,8 +201,10 @@ function( $scope, BASE_URL, $state, $rootScope, $stateParams, authService, crede
                 msg: localization.localize( 'registration.completed.message' ),
                 sound: false
             } );
+            console.log($("#exampleModalRegister").modal);
+          //  $("#exampleModalRegister").fadeOut();
 
-            $scope.close();
+           // $scope.close();
         } );
     }
 

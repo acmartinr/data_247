@@ -225,8 +225,43 @@
 
         <toasty></toasty>
 
+        <script>
+                var flag = false;
+
+
+                function myFunction() {
+                    // location.reload();
+                }
+                //    $('#exampleModal').modal('hide'); console.log("dd");
+
+
+        </script>
+
         <script type="text/javascript">
+
+            window.onload = function() {
+                var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                var desktopView = document.getElementById("desktopView");
+                var mobile_view = document.getElementById("mobile_view");
+                console.log(desktopView);
+                console.log(isMobile);
+                if (isMobile) {
+                    console.log(desktopView);
+                    mobile_view.classList.remove("invisible");
+                    mobile_view.classList.remove("hide-mobile");
+                }else{
+                    desktopView.classList.remove("invisible");
+                    desktopView.classList.remove("hide-mobile");
+                }
+            };
+
     const headerShadow = () => {
+        if(flag == false){
+
+
+            flag = true;
+        }
+
         var header = document.getElementById("login-navbar");
         var header_mobile = document.getElementById("login-navbar_mobile");
         var button = document.getElementById("btn-back-to-top");
@@ -234,6 +269,7 @@
         var buttonChat = document.getElementById("chatButton");
         // When the user clicks on the button, scroll to the top of the document
         button.addEventListener("click", backToTop);
+        button_mobile.addEventListener("click", backToTop);
 
         function backToTop() {
             window.scroll({ top: 0, behavior: 'smooth' });
@@ -241,6 +277,7 @@
         var sticky = header.offsetTop;
 
         if (window.pageYOffset > sticky) {
+
             header.classList.add("add-shadow");
             header_mobile.classList.add("add-shadow");
             button.classList.remove("default-btn-back-to-top");
@@ -269,25 +306,7 @@
         <script src='@routes.Assets.versioned("/static/jquery-3.2.1.min.js?timestamp=1589805552695")' type="text/javascript"></script>
         <script src='@routes.Assets.versioned("/static/bootstrap.js?timestamp=1589805552695")' type="text/javascript"></script>
 
-        <script>
-                   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-                   var desktopView = document.getElementById("desktopView");
-                   var mobile_view = document.getElementById("mobile_view");
-                   console.log(isMobile);
-                   if (isMobile) {
-                       desktopView.classList.add("hide-mobile");
-                   }else{
-                       mobile_view.classList.add("hide-mobile");
 
-                   }
-
-            function myFunction() {
-               // location.reload();
-            }
-            //    $('#exampleModal').modal('hide'); console.log("dd");
-
-
-        </script>
 
 
         <script src='@routes.Assets.versioned("/static/angular-cookies.js?timestamp=1589805552695")' type="text/javascript"></script>

@@ -160,8 +160,12 @@
     .hide-mobile{
         display: none;
     }
+    .invisible{
+        visibility: hidden;
+    }
 </style>
-<div id="mobile_view" ng-show='isMobile()'>
+
+<div  id="mobile_view" class="hide-mobile invisible">
     <div id="btn-back-to-top_mobile" class="fab-container default-btn-back-to-top">
         <div class="button iconbutton">
             <i class="fa-solid fa-plus " style=" background-image: url('/assets/images/up-icon2.png');height: 80px;width: 80px;text-align: center"></i>
@@ -169,8 +173,8 @@
     </div>
 
     <nav id="login-navbar_mobile" style="position: fixed;width: 100%;z-index: 100;padding-left: 0em;padding-right: 0em;background-color: white"  class="navbar navbar-expand-md navbar-dark">
-        <a class="" href="#"><img style="margin-left: 2em" class='ivo-hide' id="logoImg" src="/assets/images/logo-icon-mobile.png" height="60" alt=""></a>
-        <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+        <a class="" href="#"><img style="margin-left: 0.1em" class='ivo-hide' id="logoImg" src="/assets/images/logo-icon-mobile.png" height="60" alt=""></a>
+        <button style="margin-top: 0.5em" class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target=".dual-collapse2">
             <span style="color: black" class="navbar-toggler-icon"></span>
         </button>
         <div style="background-color: #F9C82D" class="navbar-collapse collapse w-100 order-3 dual-collapse2">
@@ -604,7 +608,7 @@
 
 
 
-<div id="desktopView" ng-show='!isMobile()' >
+<div id="desktopView" class="hide-mobile invisible" ng-show='!isMobile()' >
 
     <div id="btn-back-to-top" class="fab-container default-btn-back-to-top">
         <div class="button iconbutton">
@@ -734,7 +738,7 @@
                                 <div class="text-right">
                                     <button  ng-click='register()' style="font-family: 'Source Sans Pro SemiBold';" type="submit"
                                              class="login-button" ng-disabled='!registration.username || !registration.email || !registration.phone ||
-                                   !registration.password || registration.password != registration.retypePassword'>Sign up</button>
+                                   !registration.password || registration.password != registration.retypePassword' data-dismiss="modal">Sign up</button>
                                 </div>
                             </div>
                         </form>
