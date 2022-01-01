@@ -175,13 +175,145 @@
      */
 </style>
 
-<div  id="mobile_view" class="">
+<!-- Mobile Version Code-->
+<div  id="mobile_view" ng-class='{"ivo-container": ivoSite}' ng-visible="!visibility.hide" class="main-wrapper">
+    <!-- Up to Top Btn-->
     <div id="btn-back-to-top_mobile" class="fab-container default-btn-back-to-top">
         <div class="button iconbutton">
             <i class="fa-solid fa-plus " style=" background-image: url('/assets/images/up-icon2.png');height: 80px;width: 80px;text-align: center"></i>
         </div>
     </div>
+    <!-- Up to Top Btn-->
 
+<!-- Login Modal Code-->
+    <div class="modal fade" id="loginModalMobile" tabindex="-1" role="dialog" aria-labelledby="loginModalMobileLabel" aria-hidden="true">
+        <div style="margin-top: 1em;" class="modal-dialog" role="document">
+            <div style="padding: 1em 1em 0em 1em" class="modal-content">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col col-lg-6">
+                                <p style="font-family: 'Source Sans Pro SemiBold';color: #707070;font-size: 28px;margin-left: -0.4em" id="loginModalMobileLabel">Log in</p>
+                            </div>
+                            <div class="col col-lg-6">
+                                <p style="font-family: 'Source Sans Pro SemiBold';color: #707070;font-size: 18px;text-align: right;margin-right: 1em" id="loginModalMobileLabel2">Sign Up</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form ng-submit='login()' onsubmit="myFunction()">
+                        <div class="form-group" style="margin-right: 2em">
+                            <input style="background-color: #EEEEEE;font-family: 'Source Sans Pro SemiBold';" ng-model='loginRequest.username'
+                                   class="form-control text-transform-none" placeholder="Email">
+                        </div>
+                        <div class="form-group" style="margin-right: 2em">
+                            <input style="background-color: #EEEEEE;font-family: 'Source Sans Pro SemiBold';" type="password"
+                                   ng-model='loginRequest.password'
+                                   class="form-control" placeholder="Password">
+                            <br>
+                            <a style="color: #707070;font-family: 'Source Sans Pro SemiBold';font-size: 20px" class='forgot' ng-click='openForgotPasswordPopup()'>Forgot password?</a>
+                        </div>
+                        <div style="margin-left: -1em" class="form-group terms-of-use">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-1">
+                                        <input class='checkbox'
+                                               id="termsAgreed"
+                                               type="checkbox"
+                                               ng-model='loginRequest.termsAgreed'>
+                                    </div>
+                                    <div class="col-11">
+                                        <label style="font-size: 16px" for="termsAgreed">
+                                            By using MakeMyData software, you agree to the
+                                            <a style="color: #E87E04;font-family: 'Source Sans Pro';font-size: 16px" class='terms-link' target="_blank" href="/#/terms">MakeMyData General Terms and Conditions</a>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <div class="text-right">
+                                <button style="font-family: 'Source Sans Pro SemiBold'; font-size: 18px" type="submit"
+                                        class="login-button">Log in</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Login Modal Code-->
+
+    <!-- Register Modal Mobile-->
+    <div class="modal fade" id="modalRegisterMobile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div style="" class="modal-dialog" role="document">
+            <div style="padding: 1em 1em 0em 1em" class="modal-content">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col col-lg-6">
+                                <p style="font-family: 'Source Sans Pro SemiBold';color: #707070;font-size: 28px;margin-left: -0.4em" id="exampleModalLabelMobile">Sign up</p>
+                            </div>
+                            <div class="col col-lg-6">
+                                <p style="font-family: 'Source Sans Pro SemiBold';color: #707070;font-size: 18px;text-align: right;margin-right: 1em" id="exampleModalLabel2">Log in</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form autocomplete="off" onsubmit="myFunction()">
+                        <div class="form-group" style="margin-right: 2em">
+                            <input style="background-color: #EEEEEE;font-family: 'Source Sans Pro SemiBold';" ng-model='registration.username'
+                                   class="form-control text-transform-none" placeholder="Name" type="text">
+                        </div>
+                        <div class="form-group" style="margin-right: 2em">
+                            <input style="background-color: #EEEEEE;font-family: 'Source Sans Pro SemiBold';" type="text"
+                                   ng-model='registration.companyName'
+                                   class="form-control" placeholder="Company">
+                        </div>
+                        <div class="form-group" style="margin-right: 2em">
+                            <input style="background-color: #EEEEEE;font-family: 'Source Sans Pro SemiBold';" type="email"
+                                   ng-model='registration.email'
+                                   class="form-control" placeholder="Email (required):">
+                        </div>
+                        <div class="form-group" style="margin-right: 2em">
+                            <input style="background-color: #EEEEEE;font-family: 'Source Sans Pro SemiBold';" type="text"
+                                   ng-model='registration.phone'
+                                   class="form-control" placeholder="Cell phone (required):">
+                        </div>
+                        <div class="form-group" style="margin-right: 2em">
+                            <input style="background-color: #EEEEEE;font-family: 'Source Sans Pro SemiBold';" type="text"
+                                   ng-model='registration.address'
+                                   class="form-control" placeholder="State:">
+                        </div>
+                        <div class="form-group" style="margin-right: 2em">
+                            <input style="background-color: #EEEEEE;font-family: 'Source Sans Pro SemiBold';" type="password"
+                                   ng-model='registration.password'
+                                   class="form-control" placeholder="Password (required):">
+                        </div>
+                        <div class="form-group" style="margin-right: 2em">
+                            <input style="background-color: #EEEEEE;font-family: 'Source Sans Pro SemiBold';" type="password"
+                                   ng-model='registration.retypePassword'
+                                   class="form-control" placeholder="Retype password (required):">
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <div class="text-right">
+                                <button  ng-click='register()' style="font-family: 'Source Sans Pro SemiBold';" type="submit"
+                                         class="login-button" ng-disabled='!registration.username || !registration.email || !registration.phone ||
+                                   !registration.password || registration.password != registration.retypePassword' data-dismiss="modal">Sign up</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Register Modal Mobile-->
+
+<!-- NavBar Code-->
     <nav id="login-navbar_mobile" style="position: fixed;width: 100%;z-index: 100;padding-left: 0em;padding-right: 0em;background-color: white"  class="navbar navbar-expand-md navbar-dark">
         <a class="" href="#"><img style="margin-left: 0.1em" class='ivo-hide' id="logoImg" src="/assets/images/logo-icon-mobile.png" height="60" alt=""></a>
         <button style="margin-top: 0.5em" class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target=".dual-collapse2">
@@ -216,11 +348,14 @@
             </ul>
         </div>
     </nav>
+    <!-- Navbar Code-->
     <br>
     <br>
     <br>
     <br>
     <br>
+
+    <!-- Section one Code with sign up and login btn-->
     <div class="container">
         <div class="row">
             <div class="col col-lg-12 " style="text-align: center">
@@ -256,11 +391,11 @@
         </div>
         <div class="row">
             <div   class="col col-lg-6">
-                <button style="font-family: 'Source Sans Pro SemiBold'" class="login-button-response" data-toggle="modal" data-target="#exampleModal">Log in </button>
+                <button style="font-family: 'Source Sans Pro SemiBold'" class="login-button-response" data-toggle="modal" data-target="#loginModalMobile">Log in </button>
             </div>
             <div class="col col-lg-6">
 
-                <button  class="login-button-response" style="margin-right: 1em; background-color: transparent;color: black;border: black;border-style: solid;border-width: 1px;font-family: 'Source Sans Pro SemiBold'" data-toggle="modal" data-target="#exampleModalRegister">Sign up</button>
+                <button  class="login-button-response" style="margin-right: 1em; background-color: transparent;color: black;border: black;border-style: solid;border-width: 1px;font-family: 'Source Sans Pro SemiBold'" data-toggle="modal" data-target="#modalRegisterMobile">Sign up</button>
             </div>
         </div>
         <br>
@@ -271,6 +406,7 @@
             </div>
         </div>
     </div>
+    <!-- Section one Code with sign up and login btn-->
     <div class="container">
         <div class="row">
             <img class='ivo-hide' src="/assets/images/group-icon.png" height="28" alt=""> <p class="login-text" style="font-size: 20px;margin-left: 0.5em;">Which Type of Leads Do You Need?</p>
@@ -353,18 +489,22 @@
         <br>
         <div class="container">
             <div class="row">
-                <div style="text-align: center" class="col col-lg-4">
+                <div style="text-align: center" class="col col-lg-12">
                     <img style="margin-bottom: 1em" class='ivo-hide' src="/assets/images/duplicates.png" height="122" alt="">
                     <p style="font-family: 'Source Sans Pro SemiBold';color: white;font-size: 20px">AVOID DUPLICATES</p>
                     <p style="font-family: 'Source Sans Pro';color: white;font-size: 20px">Upload your own lists to avoid buying duplicates</p>
                 </div>
-                <div style="text-align: center" class="col col-lg-4">
+            </div>
+            <div class="row">
+                <div style="text-align: center" class="col col-lg-12">
                     <img style="margin-bottom: 1em" class='ivo-hide' src="/assets/images/group.png" height="122" alt="">
                     <p style="font-family: 'Source Sans Pro SemiBold';color: white;font-size: 20px">SELECT DEMOGRAPHICS</p>
                     <p style="font-family: 'Source Sans Pro';color: white;font-size: 20px">Choose from a wide selection of Demo-
                         graphics and Keywords</p>
                 </div>
-                <div style="text-align: center" class="col col-lg-4">
+            </div>
+            <div class="row">
+                <div style="text-align: center" class="col col-lg-12">
                     <img style="margin-bottom: 1em" class='ivo-hide' src="/assets/images/path.png" height="122" alt="">
                     <p style="font-family: 'Source Sans Pro SemiBold';color: white;font-size: 20px">ENDLESS COMBINATIONS</p>
                     <p style="font-family: 'Source Sans Pro';color: white;font-size: 20px">Homeowners, Business Owners,
@@ -394,12 +534,12 @@
     <br>
     <div class="container">
         <div class="row">
-            <img class='ivo-hide' src="/assets/images/group_2.png"alt="" width="100%">
+            <img class='ivo-hide' src="/assets/images/group_2.png"alt="" height="150px" width="100%">
         </div>
     </div>
     <br>
     <br>
-    <div  id= "servicesElementsM"  class="container">
+    <div  id= "servicesElementsM"  class="container" style="margin-left: 0.5em;margin-right: 0.5em">
         <div class="row">
             <img class='ivo-hide' src="/assets/images/group-icon.png" height="28" alt=""> <p class="login-text" style="font-size: 20px;margin-left: 0.5em;">Need Marketing Software?</p>
         </div>
@@ -577,16 +717,16 @@
 
 
 
-    <div class="container">
+    <div style="margin-right: 0.5em;margin-left: 0.5em" class="container">
         <div class="row">
             <div id="collapseExample" class='comments collapse' ng-class="{'border-bottom': comments.indexOf(comment) != comments.length - 1}" ng-repeat="comment in comments">
                 <p style="font-family: 'Source Sans Pro SemiBold'; line-height: 0px; font-size: 20px;color: #707070" class='comment-name'>{{comment.name}}</p>
-                <p style="font-family: 'Source Sans Pro'; line-height: 5px; font-size: 18px;color: #707070"  class='comment-value'>{{comment.comment}}</p>
+                <p style="font-family: 'Source Sans Pro'; font-size: 18px;color: #707070"  class='comment-value'>{{comment.comment}}</p>
                 <p style="font-family: 'Source Sans Pro'; font-size: 18px;color: #707070"  class='comment-date'>{{comment.date | date: 'MM/dd/yyyy HH:mm'}}</p>
 
                 <div style="margin-left: 2em" ng-if='comment.answer' class='comment-answer'>
                     <p style="font-family: 'Source Sans Pro SemiBold';font-style: italic; font-size: 20px;color: #707070" class='comment-name'>Seller's response</p>
-                    <p style="font-style: italic;font-family: 'Source Sans Pro';line-height: 5px;color: #707070;font-size: 20px;" class='comment-value'>{{comment.answer}}</p>
+                    <p style="font-style: italic;font-family: 'Source Sans Pro';color: #707070;font-size: 20px;" class='comment-value'>{{comment.answer}}</p>
                 </div>
 
             </div>
@@ -614,10 +754,10 @@
     <div/>
 </div>
 </div>
+<!-- Mobile Version Code-->
 
 
-
-
+<!-- Desktop Version Code-->
 <div id="desktopView" class="" ng-show='!isMobile()' >
 
     <div id="btn-back-to-top" class="fab-container default-btn-back-to-top">
@@ -1280,3 +1420,4 @@
         </div>
     </div>
 </div>
+<!-- Desktop Version Code-->
