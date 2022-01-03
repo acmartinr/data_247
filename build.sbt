@@ -47,7 +47,7 @@ libraryDependencies ++= Seq(
 )
 
 // Add app folder as resource directory so that mapper xml files are in the classpath
-unmanagedResourceDirectories in Compile <+= baseDirectory( _ / "app" )
+unmanagedResourceDirectories in Compile += baseDirectory( _ / "app" ).value
 
 // but filter out java and html files that would then also be copied to the classpath
 excludeFilter in Compile in unmanagedResources := "*.java" || "*.html"
