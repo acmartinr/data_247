@@ -1,0 +1,459 @@
+<div  id="mobile_view" ng-class='{"ivo-container": ivoSite}' ng-visible="!visibility.hide" class="main-wrapper">
+    <!-- Up to Top Btn-->
+    <div id="btn-back-to-top_mobile" class="fab-container default-btn-back-to-top">
+        <div class="button iconbutton">
+            <i class="fa-solid fa-plus " style=" background-image: url('/assets/images/up-icon2.png');height: 80px;width: 80px;text-align: center"></i>
+        </div>
+    </div>
+    <!-- Up to Top Btn-->
+
+    <!-- Login Modal Mobile Code-->
+    <div ng-include="'/assets/partials/login/signInModalMobile.html'"></div>
+    <!-- Login Modal Mobile Code-->
+
+    <!-- Register Modal Mobile-->
+    <div ng-include="'/assets/partials/login/registerModalMobile.html'"></div>
+    <!-- Register Modal Mobile-->
+
+    <!-- NavBar Code-->
+    <nav id="login-navbar_mobile" style="position: fixed;width: 100%;z-index: 100;padding-left: 0em;padding-right: 0em;background-color: white"  class="navbar navbar-expand-md navbar-dark">
+        <a class="" href="#"><img style="margin-left: 0.1em" class='ivo-hide' id="logoImg" src="/assets/images/logo-icon-mobile.png" height="60" alt=""></a>
+        <button style="margin-top: 0.5em" class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span style="color: black" class="navbar-toggler-icon"></span>
+        </button>
+        <div style="background-color: #F9C82D" class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul style="" class="navbar-nav ml-auto">
+                <li style="height: 35px;margin-top: 35px;margin-left: 36px" class="nav-item">
+                    <a id= "contactUsBtn" ng-click="goToContactUsMobile()" href="#" style="font-family: 'Source Sans Pro SemiBold';font-size: 18px;margin-right: 3em;text-decoration: none;color:white;">Contact us</a>
+                    <div style="background-color: #707070;height: 0.1em;width: 75%;text-align: center;margin-top: 17px">
+
+                    </div>
+                </li>
+
+                <li style="height: 35px;margin-top: 35px;margin-left: 36px" class="nav-item">
+
+                    <a href="#" ng-click="goToServicesMobile()" style="font-family: 'Source Sans Pro SemiBold';font-size: 18px;margin-right: 3em;text-decoration: none;color:black;color:white;">Services</a>
+                    <div style="background-color: #707070;height: 0.1em;width: 75%;text-align: center;margin-top: 17px">
+
+                    </div>
+                </li>
+                <li style="height: 35px;margin-top: 35px;margin-left: 36px" class="nav-item">
+                    <a href="#" ng-click="goToVideosMobile()"   style="font-family: 'Source Sans Pro SemiBold';font-size: 18px;margin-right: 3em; text-decoration: none;color:black;color:white;">Videos</a>
+                    <div style="background-color: #707070;height: 0.1em;width: 75%;text-align: center;margin-top: 17px">
+
+                    </div>
+                </li>
+                <li style="height: 35px;margin-top: 35px;margin-bottom: 35px;margin-left: 36px" class="nav-item">
+                    <a href="#" ng-click="goToCommentsMobile()" style="font-family: 'Source Sans Pro SemiBold';font-size: 18px;text-decoration: none;color:black;color:white;">Comments</a>
+
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Navbar Code-->
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <!-- Section one Code with sign up and login btn-->
+    <div class="container">
+        <div class="row">
+            <div class="col col-lg-12 " style="text-align: center">
+                <img id="img_sect_1" class='ivo-hide' src="/assets/images/search2.png" height="627" alt="">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col col-lg-12">
+                <div id="section_1_txt_title" style="margin-top: 28px">
+                    <p>Start right now,
+                        get a list
+                        in minutes.
+                    </p>
+                    <br>
+                    <ul>
+                        <li>
+                            Business Owners
+                        </li>
+                        <li>
+                            Home Owners Lists
+                        </li>
+                        <li>
+                            Cell Phones and Emails
+                        </li>
+                        <li>
+                            List Hygiene Skip Tracing
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div   class="col col-lg-6">
+                <button style="font-family: 'Source Sans Pro SemiBold'" class="login-button-response" data-toggle="modal" data-target="#loginModalMobile">Log in </button>
+            </div>
+            <div class="col col-lg-6">
+
+                <button  class="login-button-response" style="margin-right: 1em; background-color: transparent;color: black;border: black;border-style: solid;border-width: 1px;font-family: 'Source Sans Pro SemiBold'" data-toggle="modal" data-target="#modalRegisterMobile">Sign up</button>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col col-lg-12 " style="text-align: center">
+                <img class='ivo-hide' src="/assets/images/search_icon.png" width="100%" alt="">
+            </div>
+        </div>
+    </div>
+    <br>
+    <!-- Section one Code with sign up and login btn-->
+    <div class="container">
+        <div style="margin-left: 0.3em;" class="row">
+            <img class='ivo-hide' src="/assets/images/group-icon.png" height="28" alt=""> <p class="login-text" style="font-size: 20px;margin-left: 0.5em;">Which Type of Leads Do You Need?</p>
+        </div>
+        <div class="row">
+            <div  style="color: #707070;" class="col col-lg-3">
+                <button style="font-family: 'Source Sans Pro SemiBold';" class="login-button">Bussines </button>
+                <br>
+                <br>
+                <p style="color: #707070;font-family: 'Source Sans Pro SemiBold'">BUSINESS LISTS</p>
+                <br>
+                <ul style="margin-left: -1em;color: #707070;font-family: 'Source Sans Pro'">
+                    <li>
+                        Business Owners
+                    </li>
+                    <li>
+                        Home Owners Lists
+                    </li>
+                    <li>
+                        Cell Phones and Emails
+                    </li>
+                    <li>
+                        List Hygiene Skip Tracing
+                    </li>
+                </ul>
+            </div>
+            <div style="color: #707070;" class="col col-lg-3">
+                <button style="font-family: 'Source Sans Pro SemiBold'" class="login-button">Costumer</button>
+                <br>
+                <br>
+                <p style="color: #707070;font-family: 'Source Sans Pro SemiBold'">HOMEOWNER LISTS</p>
+                <br>
+                <p style="margin-bottom: -0.2em">New Homeowners</p>
+                <ul style="margin-left: -1em;color: black;font-family: 'Source Sans Pro';color: #707070;">
+                    <li>
+                        Hispanic Homeowners
+                    </li>
+                    <li>
+                        Military & Veteran Homeowners
+                    </li>
+                    <li>
+                        Homeowner that Own Businesses
+                    </li>
+                    <li>
+                        Homeowner Age, Income & Credit
+                    </li>
+                    <li>
+                        Homeowner Emails & Cell Phones
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col col-lg-12">
+                <p style="font-family: 'Source Sans Pro';font-weight: bold;color: #707070;font-size: 20px">EASY SEARCH</p>
+                <p style="font-family: 'Source Sans Pro';color: #707070;font-size: 18px">Search and get counts of unlimited lists.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-lg-12">
+                <p style="font-family: 'Source Sans Pro';font-weight: bold;color: #707070;font-size: 20px">DISCOUNT BULK PRICING</p>
+                <p style="font-family: 'Source Sans Pro';color: #707070;font-size: 18px">Cutting out the data middle-man gives you unbeatable prices.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-lg-12">
+                <p style="font-family: 'Source Sans Pro';font-weight: bold;color: #707070;font-size: 20px">NEW 2021 DATABASES</p>
+                <p style="font-family: 'Source Sans Pro';color: #707070;font-size: 18px">Leads that are always fresh,and will continue to be updated.</p>
+            </div>
+        </div>
+    </div>
+
+    <div style="background-color: #3B3B3B;border: #707070;border-style: solid;border-width: 1px;padding-bottom: 2em">
+        <div class="container">
+            <p style="text-align: center;color: white;font-size: 18px;font-family: 'Source Sans Pro SemiBold';margin-top: 70px">Create Your Own High Quality Lists</p>
+        </div>
+        <br>
+        <div class="container">
+            <div class="row">
+                <div style="text-align: center" class="col col-lg-12">
+                    <img style="margin-bottom: 1em" class='ivo-hide' src="/assets/images/duplicates.png" height="122" alt="">
+                    <p style="font-family: 'Source Sans Pro SemiBold';color: white;font-size: 20px">AVOID DUPLICATES</p>
+                    <p style="font-family: 'Source Sans Pro';color: white;font-size: 20px">Upload your own lists to avoid buying duplicates</p>
+                </div>
+            </div>
+            <div class="row">
+                <div style="text-align: center" class="col col-lg-12">
+                    <img style="margin-bottom: 1em" class='ivo-hide' src="/assets/images/group.png" height="122" alt="">
+                    <p style="font-family: 'Source Sans Pro SemiBold';color: white;font-size: 20px">SELECT DEMOGRAPHICS</p>
+                    <p style="font-family: 'Source Sans Pro';color: white;font-size: 20px">Choose from a wide selection of Demo-
+                        graphics and Keywords</p>
+                </div>
+            </div>
+            <div class="row">
+                <div style="text-align: center" class="col col-lg-12">
+                    <img style="margin-bottom: 1em" class='ivo-hide' src="/assets/images/path.png" height="122" alt="">
+                    <p style="font-family: 'Source Sans Pro SemiBold';color: white;font-size: 20px">ENDLESS COMBINATIONS</p>
+                    <p style="font-family: 'Source Sans Pro';color: white;font-size: 20px">Homeowners, Business Owners,
+                        and Endless Combinations</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="container">
+        <p style="text-align: center;color: #707070;font-size: 18px;font-family: 'Source Sans Pro SemiBold';">DO YOU HAVE A QUESTION AFTER BUSINESS HOURS?</p>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div style="text-align: center;" class="col col-lg-12">
+                <button style="font-family: 'Source Sans Pro SemiBold';background-color: #707070;font-size: 18px" class="home-button">Send us a message</button>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="container">
+        <p style="text-align: center;color: black;font-size: 17px;font-family: 'Source Sans Pro';">Click <strong style="color: #F9C82D;font-family: 'Source Sans Pro';font-weight: bold">Live Chat </strong> to Speak With Our Helpful</p>
+        <p style="text-align: center;color: black;font-size: 17px;font-family: 'Source Sans Pro';">Make My Data Support Team Now</p>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <img class='ivo-hide' src="/assets/images/group_2.png"alt="" height="150px" width="100%">
+        </div>
+    </div>
+    <br>
+    <br>
+    <div  id= "servicesElementsM"  class="container" style="margin-left: 0.5em;margin-right: 0.5em">
+        <div class="row">
+            <img class='ivo-hide' src="/assets/images/group-icon.png" height="28" alt=""> <p class="login-text" style="font-size: 20px;margin-left: 0.5em;">Need Marketing Software?</p>
+        </div>
+        <div class="row">
+            <p style="font-size: 22px;font-family: 'Source Sans Pro SemiBold';color: #707070">We Can Refer You to Companies that offer these Campaigns:</p>
+            <ul style="color: black;font-family: 'Source Sans Pro';color: #707070;">
+                <li>
+                    Press1 Dialer
+                </li>
+                <li>
+                    SMS Marketing
+                </li>
+                <li>
+                    Ringless Voicemail
+                </li>
+                <li>
+                    Bulk Email Campaign
+                </li>
+                <li>
+                    Remote Telemarketers
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <img class='ivo-hide' src="/assets/images/software-icon.png" height="28" alt=""> <p class="login-text" style="font-size: 20px;margin-left: 0.5em;">Need Software Services?</p>
+        </div>
+        <div class="row">
+            <p style="font-size: 22px;font-family: 'Source Sans Pro SemiBold';color: #707070">We Can Develop and Design Your own Software:</p>
+            <ul style="color: black;font-family: 'Source Sans Pro';color: #707070;">
+                <li>
+                    Custom Data Tool
+                </li>
+                <li>
+                    Directory Scraping
+                </li>
+                <li>
+                    CRM Email Automation
+                </li>
+                <li>
+                    Mobile App Development
+                </li>
+                <li>
+                    Reselling & White Labeling
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <img class='ivo-hide' src="/assets/images/data-icon.png" height="28" alt=""> <p class="login-text" style="font-size: 20px;margin-left: 0.5em;">MMD Has Many Data Sources</p>
+        </div>
+        <div class="row">
+            <ul style="color: black;font-family: 'Source Sans Pro';color: #707070;">
+                <li>
+                    Aged Internet Leads
+                </li>
+                <li>
+                    County Records
+                </li>
+                <li>
+                    Online Scraping
+                </li>
+                <li>
+                    Credit Agencies
+                </li>
+            </ul>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div id="videoElementsM" style="text-align: center">
+        <p style="font-size: 20px;font-family: 'Source Sans Pro SemiBold';color: black">Learn About the Homeowner Database</p>
+    </div>
+
+
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <iframe width="100%"  src="https://www.youtube.com/embed/aCafChgvZQM"></iframe>
+            </div>
+            <div class="carousel-item">
+                <iframe width="100%"  src="https://www.youtube.com/embed/KscZCC4-_C0"></iframe>
+            </div>
+        </div>
+        <a style="background-color: #707070;height: 50%;top: 22%" class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a style="background-color: #707070;height: 50%;top: 22%" class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-1">
+                <img class='ivo-hide' style="" src="/assets/images/house-icon.png" height="28" alt="">
+            </div>
+            <div class="col-11">
+                <p class="login-text" style="font-size: 20px;margin-left: 0.3em">Would you like to build your own CRM system that organizes all your leads?</p>
+            </div>
+        </div>
+        <div class="row">
+            <ul style="color: black;font-family: 'Source Sans Pro';color: #707070;font-size: 16px">
+                <li>
+                    Also use the same system to contact your leads with automatic reply messages, notifications, reminders, transactional messages and marketing offers.
+                </li>
+                <li>
+                    Contact the leads via email, sms, live chat, voicemail drop and virtual attendants.
+                </li>
+                <li>
+                    The cost is low because the system is slowly being build as features are needed.
+                </li>
+                <li>
+                    Building our own Custom CRM is not confusing. You start with a basic database of your leads and add features as needed.
+                </li>
+                <li>
+                    Everything becomes automated and integrated into your business.
+                </li>
+            </ul>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div id= "contactUsElementM" class="container">
+        <div class="row">
+            <div style="margin-top: 1em" class="col col-lg-12">
+                <p style="color: #707070;font-size: 39px;font-family: 'Source Sans Pro SemiBold';">Contact us</p>
+                <form>
+                    <div class="form-group">
+                        <input ng-model="feedback.name" style="background-color: #EEEEEE;font-family: 'Source Sans Pro SemiBold';color: #707070" type="text" class="form-control" id="input-name" aria-describedby="emailHelp" placeholder="Name:">
+                        <br>
+                        <input ng-model="feedback.email" style="background-color: #EEEEEE;font-family: 'Source Sans Pro SemiBold';color: #707070" type="email" class="form-control" id="input-email" aria-describedby="emailHelp" placeholder="Email (required):">
+                        <br>
+                        <textarea ng-model="feedback.message" style="background-color: #EEEEEE;font-family: 'Source Sans Pro SemiBold';color: #707070" class="form-control" id="FormControlTextarea" rows="6"  placeholder="Message:"></textarea>
+                        <br>
+                        <div class="row">
+                            <div  class="col col-lg-6">
+                            </div>
+                            <div style="text-align: right"  class="col col-lg-6">
+                                <button ng-click='sendFeedback()'  type="submit"
+                                        ng-disabled='!feedback.email || !feedback.message' class="login-button" style="font-size: 18px;color: white;font-family: 'Source Sans Pro SemiBold'">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div id="commentsElementM" class="container" style="margin-top: 12px">
+        <div class="row" style="height: 0.1em;background-color: #788084; ">
+        </div>
+    </div>
+    <br>
+    <br>
+    <div  class="container">
+        <div class="row">
+
+            <div style="text-align: center"  class="col col-lg-12">
+
+                <button data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"  class="login-button" style="margin-right: -0.3em; width:50px; font-size: 18px;color: white;font-family: 'Source Sans Pro SemiBold'">-</button>
+                <button class="login-button" style="margin-left: 0px;background-color: #707070; font-size: 18px;color: white;font-family: 'Source Sans Pro SemiBold'">Comments</button>
+
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+
+
+
+    <div style="margin-right: 0.5em;margin-left: 0.5em" class="container">
+        <div class="row">
+            <div id="collapseExample" class='comments collapse' ng-class="{'border-bottom': comments.indexOf(comment) != comments.length - 1}" ng-repeat="comment in comments">
+                <p style="font-family: 'Source Sans Pro SemiBold'; line-height: 0px; font-size: 20px;color: #707070" class='comment-name'>{{comment.name}}</p>
+                <p style="font-family: 'Source Sans Pro'; font-size: 18px;color: #707070"  class='comment-value'>{{comment.comment}}</p>
+                <p style="font-family: 'Source Sans Pro'; font-size: 18px;color: #707070"  class='comment-date'>{{comment.date | date: 'MM/dd/yyyy HH:mm'}}</p>
+
+                <div style="margin-left: 2em" ng-if='comment.answer' class='comment-answer'>
+                    <p style="font-family: 'Source Sans Pro SemiBold';font-style: italic; font-size: 20px;color: #707070" class='comment-name'>Seller's response</p>
+                    <p style="font-style: italic;font-family: 'Source Sans Pro';color: #707070;font-size: 20px;" class='comment-value'>{{comment.answer}}</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div style="background-color: #3B3B3B;border: #3B3B3B;border-style: solid;border-width: 1px;height: 322px">
+        <br>
+        <br>
+        <br>
+        <div class="container">
+            <div class="row">
+                <div style="text-align: center" class="col col-lg-4">
+                </div>
+                <div style="text-align: center" class="col col-lg-4">
+                    <img style="margin-bottom: 1em" class='ivo-hide' src="/assets/images/logo-icon.png" height="174" alt="">
+                </div>
+                <div style="text-align: center" class="col col-lg-4">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div/>
+</div>
+</div>
