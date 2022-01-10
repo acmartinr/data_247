@@ -21,10 +21,10 @@
         <button style="margin-top: 0.5em;background-color: transparent;" class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
             <span style="color: black" class="navbar-toggler-icon"></span>
         </button>
-        <div style="background-color: #F9C82D" class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <div id= "collapse_nav" style="background-color: #F9C82D" class="navbar-collapse collapse w-100 order-3 dual-collapse2">
             <ul style="" class="navbar-nav ml-auto">
                 <li style="height: 35px;margin-top: 35px;margin-left: 36px" class="nav-item">
-                    <a id= "contactUsBtn" ng-click="goToContactUsMobile()" href="#" style="font-family: 'Source Sans Pro SemiBold';font-size: 18px;margin-right: 3em;text-decoration: none;color:white;">Contact us</a>
+                    <a data-toggle="collapse" data-target="#collapse_nav" id= "contactUsBtn" ng-click="goToContactUsMobile()" href="#" style="font-family: 'Source Sans Pro SemiBold';font-size: 18px;margin-right: 3em;text-decoration: none;color:white;">Contact us</a>
                     <div style="background-color: #707070;height: 0.1em;width: 75%;text-align: center;margin-top: 17px">
 
                     </div>
@@ -32,19 +32,19 @@
 
                 <li style="height: 35px;margin-top: 35px;margin-left: 36px" class="nav-item">
 
-                    <a href="#" ng-click="goToServicesMobile()" style="font-family: 'Source Sans Pro SemiBold';font-size: 18px;margin-right: 3em;text-decoration: none;color:black;color:white;">Services</a>
+                    <a data-toggle="collapse" data-target="#collapse_nav" href="#" ng-click="goToServicesMobile()" style="font-family: 'Source Sans Pro SemiBold';font-size: 18px;margin-right: 3em;text-decoration: none;color:black;color:white;">Services</a>
                     <div style="background-color: #707070;height: 0.1em;width: 75%;text-align: center;margin-top: 17px">
 
                     </div>
                 </li>
                 <li style="height: 35px;margin-top: 35px;margin-left: 36px" class="nav-item">
-                    <a href="#" ng-click="goToVideosMobile()"   style="font-family: 'Source Sans Pro SemiBold';font-size: 18px;margin-right: 3em; text-decoration: none;color:black;color:white;">Videos</a>
+                    <a data-toggle="collapse" data-target="#collapse_nav" href="#" ng-click="goToVideosMobile()"   style="font-family: 'Source Sans Pro SemiBold';font-size: 18px;margin-right: 3em; text-decoration: none;color:black;color:white;">Videos</a>
                     <div style="background-color: #707070;height: 0.1em;width: 75%;text-align: center;margin-top: 17px">
 
                     </div>
                 </li>
                 <li style="height: 35px;margin-top: 35px;margin-bottom: 35px;margin-left: 36px" class="nav-item">
-                    <a href="#" ng-click="goToCommentsMobile()" style="font-family: 'Source Sans Pro SemiBold';font-size: 18px;text-decoration: none;color:black;color:white;">Comments</a>
+                    <a data-toggle="collapse" data-target="#collapse_nav" href="#" ng-click="goToCommentsMobile()" style="font-family: 'Source Sans Pro SemiBold';font-size: 18px;text-decoration: none;color:black;color:white;">Comments</a>
 
                 </li>
             </ul>
