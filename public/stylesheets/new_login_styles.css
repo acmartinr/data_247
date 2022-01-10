@@ -17,6 +17,8 @@
     src: url("../fonts/SourceSansPro-Regular.ttf");
 }
 
+
+
 @media only screen and (max-width: 480px) {
     .home-button {
         background-color: #F9C82D;
@@ -61,6 +63,9 @@
 
 }
 @media only screen and (min-width: 480px) {
+
+
+
     .home-button {
         border: none;
         color: white;
