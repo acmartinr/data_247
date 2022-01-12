@@ -37,16 +37,16 @@
         font-family: 'Source Sans Pro SemiBold';
         color: black
     }
-    #img_sect_1{
-        height: 300px;
-        width: auto;
-    }
+    /*#img_sect_1{*/
+    /*    height: 300px;*/
+    /*    width: auto;*/
+    /*}*/
     #desktopView{
         display: none;
     }
-    #section_1_img{
-        text-align: center;
-    }
+    /*#section_1_img{*/
+    /*    text-align: center;*/
+    /*}*/
     #section_1_txt{
         text-align: center;
     }
@@ -54,7 +54,7 @@
         margin-left: 0px;
     }
     #logoImg{
-        margin-left: -4em;
+        /*margin-left: -4em;*/
         height: 50px;
     }
     button{
@@ -80,8 +80,8 @@
     }
 
     #section_1_txt_title{
-        margin-left: 130px;
-        margin-top: 56px;
+        /*margin-left: 130px;*/
+        /*margin-top: 56px;*/
         font-family: 'Source Sans Pro Black'
     }
     #section_1_txt_title p{
@@ -99,7 +99,7 @@
         display: none;
     }
     #logoImg{
-        margin-left: 4em;
+        /*margin-left: 4em;*/
     }
 
 }
@@ -133,7 +133,7 @@
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
+    /*margin: 4px 2px;*/
     cursor: pointer;
     width: 10em;
 }
@@ -147,10 +147,10 @@
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
+    /*margin: 4px 2px;*/
     cursor: pointer;
     width: 10em;
-    margin-left: 1em;
+    /*margin-left: 1em;*/
     border: black;
     border-style: solid;
     border-width: 1px;
@@ -234,12 +234,12 @@
     width:60px;
     height:60px;
 }
-.navbar-dark .navbar-toggler-icon {
-    background-image: url('/assets/images/menu-icon.png');
-}
-.navbar-dark .navbar-toggler-icon {
-    background-image: url('/assets/images/menu-icon.png');
-}
+/*.navbar-dark .navbar-toggler-icon {*/
+/*    background-image: url('/assets/images/menu-icon.png');*/
+/*}*/
+/*.navbar-dark .navbar-toggler-icon {*/
+/*    background-image: url('/assets/images/menu-icon.png');*/
+/*}*/
 .carousel-control-next-icon {
     background-image: url('/assets/images/next-icon.png');
 }
@@ -261,7 +261,7 @@
     z-index: 100;
     background-color: white;
     padding: 0px;
-    padding-right: 8em
+    /*padding-right: 8em*/
 }
 #login-navbar a img{
     margin-top: 0.3em;
@@ -273,4 +273,9 @@
     margin-right: 3em;
     text-decoration: none;
     color:black;
+}
+
+html *
+{
+    font-family: 'Source Sans Pro SemiBold', serif !important;
 }

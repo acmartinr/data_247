@@ -805,9 +805,11 @@ public class Lists extends Controller {
             try {
                 if (value.toString().length() > 4) {
                     String s = value.toString().subSequence(value.toString().length() - 4, value.toString().length()).toString();
-                    if (s.contains("2021")) {
+                    if (s.contains("2022")) {
+                        printWriter.append(value.toString().replace("2022", ""));
+                    } else if (s.contains("2021")) {
                         printWriter.append(value.toString().replace("2021", ""));
-                    } else if (s.contains("2020")) {
+                    }else if (s.contains("2020")) {
                         printWriter.append(value.toString().replace("2020", ""));
                     } else if (s.contains("2019")) {
                         printWriter.append(value.toString().replace("2019", ""));
