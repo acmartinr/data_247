@@ -11,7 +11,7 @@ angular.module( 'consumer_data_base_invoice', [ 'ngResource', 'ui.bootstrap', 'a
         if (document.URL.indexOf('localhost') != -1) {
             return '';
         }  else {
-           return "https://dev.wsdevworld.com";
+           return "https://dev.wsdevworld.com:9000";
            // return "https://www.makemydata.com";
         }
     }

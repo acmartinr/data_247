@@ -12,7 +12,7 @@ angular.module( 'consumer_data_base', [ 'ngResource', 'ngCookies', 'ui.bootstrap
             return ''; 
         } else {
            // return "https://www.makemydata.com";
-            return "https://dev.wsdevworld.com";
+            return "https://dev.wsdevworld.com:9000";
          //    return "http://test.wsdevworld.com:9000";
         }
     }
