@@ -7,7 +7,7 @@ angular.module('consumer_data_base', ['ngResource', 'ngCookies', 'ui.bootstrap',
             if (document.URL.indexOf('localhost') != -1) {
                 return '';
             } else {
-                return "https://dev.wsdevworld.com:9000";
+                return "http://dev.wsdevworld.com:9000";
                 // return "https://www.makemydata.com";
             }
         }
@@ -17,7 +17,7 @@ angular.module('consumer_data_base', ['ngResource', 'ngCookies', 'ui.bootstrap',
             'self',
             'https://www.makemydata.com/**',
             'https://youtube.com/**',
-            "https://dev.wsdevworld.com:9000/**"
+            "http://dev.wsdevworld.com:9000/**"
             // "https://www.makemydata.com"+"/**"
         ])
     })
@@ -27,7 +27,7 @@ angular.module('consumer_data_base', ['ngResource', 'ngCookies', 'ui.bootstrap',
         var BASE_URL = '';
         if (document.URL.indexOf('localhost') == -1) {
 
-            BASE_URL = "https://dev.wsdevworld.com:9000";
+            BASE_URL = "http://dev.wsdevworld.com:9000";
             // BASE_URL = "https://www.makemydata.com";
 
         }
