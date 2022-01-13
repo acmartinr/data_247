@@ -133,7 +133,7 @@
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    /*margin: 4px 2px;*/
+    margin: 4px 2px;
     cursor: pointer;
     width: 10em;
 }
@@ -147,7 +147,7 @@
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    /*margin: 4px 2px;*/
+    margin: 4px 2px;
     cursor: pointer;
     width: 10em;
     /*margin-left: 1em;*/
