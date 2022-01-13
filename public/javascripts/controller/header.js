@@ -47,7 +47,7 @@ function( $scope, BASE_URL, credentialsService, systemService, $state, $document
     }
 
     $scope.isMainService = function() {
-        return document.URL.indexOf('makemydata.com') != -1 || document.URL.indexOf('localhost') != -1/* || document.URL.indexOf("dev.wsdevworld.com") != -1*/;
+        return document.URL.indexOf('makemydata.com') != -1 || document.URL.indexOf('localhost') != -1 || document.URL.indexOf("dev.wsdevworld.com") != -1;
     }
 
     $scope.getUserBalance = function() {
