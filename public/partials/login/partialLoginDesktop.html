@@ -131,8 +131,10 @@
                 <br>
                 <p style="color: #707070;font-family: 'Source Sans Pro SemiBold'">HOMEOWNER LISTS</p>
                 <br>
-                <p style="margin-bottom: -0.2em">New Homeowners</p>
                 <ul style="margin-left: -1em;color: black;font-family: 'Source Sans Pro';color: #707070;">
+                    <li>
+                        New Homeowners
+                    </li>
                     <li>
                         Hispanic Homeowners
                     </li>
@@ -459,17 +461,19 @@
     </div>
     <div class="container">
         <div class="row mt-5">
-            <div id="collapseExample" class='comments collapse' ng-class="{'border-bottom': comments.indexOf(comment) != comments.length - 1}" ng-repeat="comment in comments">
-                <p style="font-family: 'Source Sans Pro SemiBold'; line-height: 0px; font-size: 20px;color: #707070" class='comment-name'>{{comment.name}}</p>
-                <p style="font-family: 'Source Sans Pro'; line-height: 5px; font-size: 18px;color: #707070" class='comment-value'>{{comment.comment}}</p>
+            <div id="collapseExample"  class='comments collapse' ng-class="{'border-bottom': comments.indexOf(comment) != comments.length - 1}" ng-repeat="comment in comments">
+                <p style="font-family: 'Source Sans Pro SemiBold'; font-size: 20px;color: #707070" class='comment-name'>{{comment.name}}</p>
+                <p style="font-family: 'Source Sans Pro'; font-size: 18px;color: #707070" class='comment-value'>{{comment.comment}}</p>
                 <p style="font-family: 'Source Sans Pro'; font-size: 18px;color: #707070" class='comment-date'>
                     {{comment.date | date: 'MM/dd/yyyy HH:mm'}}</p>
 
                 <div style="margin-left: 2em" ng-if='comment.answer' class='comment-answer'>
                     <p style="font-family: 'Source Sans Pro SemiBold';font-style: italic; font-size: 20px;color: #707070" class='comment-name'>Seller's response</p>
-                    <p style="font-style: italic;font-family: 'Source Sans Pro';line-height: 5px;color: #707070;font-size: 20px;" class='comment-value'>{{comment.answer}}</p>
+                    <p style="font-style: italic;font-family: 'Source Sans Pro';color: #707070;font-size: 20px;" class='comment-value'>{{comment.answer}}</p>
                 </div>
+
             </div>
+
         </div>
     </div>
     <div class="container-fluid pt-5" style="background-color: #3B3B3B;border: #3B3B3B;border-style: solid;border-width: 1px;height: 322px">

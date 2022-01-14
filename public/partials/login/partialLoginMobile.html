@@ -136,8 +136,10 @@
                     <br>
                     <p style="color: #707070;font-family: 'Source Sans Pro SemiBold'">HOMEOWNER LISTS</p>
                     <br>
-                    <p style="margin-bottom: -0.2em">New Homeowners</p>
                     <ul style="margin-left: -1em;color: black;font-family: 'Source Sans Pro';color: #707070;">
+                        <li>
+                            New Homeowners
+                        </li>
                         <li>
                             Hispanic Homeowners
                         </li>
@@ -428,8 +430,8 @@
             </div>
         </div>
         <div class="row mt-2">
-            <div id="collapseExample" class='comments collapse' ng-class="{'border-bottom': comments.indexOf(comment) != comments.length - 1}" ng-repeat="comment in comments">
-                <p style="font-family: 'Source Sans Pro SemiBold'; line-height: 0px; font-size: 20px;color: #707070" class='comment-name'>{{comment.name}}</p>
+            <div style="margin-right: 0.5em;margin-left: 0.5em" id="collapseExample" class='comments collapse' ng-class="{'border-bottom': comments.indexOf(comment) != comments.length - 1}" ng-repeat="comment in comments">
+                <p style="font-family: 'Source Sans Pro SemiBold'; font-size: 20px;color: #707070" class='comment-name'>{{comment.name}}</p>
                 <p style="font-family: 'Source Sans Pro'; font-size: 18px;color: #707070" class='comment-value'>
                     {{comment.comment}}</p>
                 <p style="font-family: 'Source Sans Pro'; font-size: 18px;color: #707070" class='comment-date'>
