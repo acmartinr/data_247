@@ -38,7 +38,7 @@ public class Lists extends Controller {
     private final int MAX_LIST_SIZE = 1000000;
     private static final DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 
-    private static final Map< Integer, DownloadListRequest > registeredDownloadRequestsMap = new ConcurrentHashMap();
+    private static final Map<Integer, DownloadListRequest> registeredDownloadRequestsMap = new ConcurrentHashMap();
     private EmailService emailService = new EmailService();
 
     private int[] resellersShouldPayForUsers = {811};
@@ -100,6 +100,7 @@ public class Lists extends Controller {
                         listDAO.getNonPurchasedListsCount(request),
                         listDAO.getNonPurchasedLists(request)))));
     }
+
     public Result getPurchasedListsLogs() {
         PagedListsRequest request = Json.fromJson(request().body().asJson(), PagedListsRequest.class);
 
@@ -108,6 +109,7 @@ public class Lists extends Controller {
                         listDAO.getPagedPurchaseListsLogsCount(request),
                         listDAO.getPagedPurchasedListsLogs(request)))));
     }
+
     public Result getEmailListSent() {
         PagedListsRequest request = Json.fromJson(request().body().asJson(), PagedListsRequest.class);
 
@@ -116,12 +118,13 @@ public class Lists extends Controller {
                         listDAO.getPagedSentListsCount(request),
                         listDAO.getPagedSentListsLogs(request)))));
     }
+
     public Result saveList() {
         ListEntity list = Json.fromJson(request().body().asJson(), ListEntity.class);
         listDAO.saveList(list);
         userDAO.updateLastActivityDateByUserId(list.getUserId(), System.currentTimeMillis());
 
-        return ok(Json.toJson(Response.OK())) ;
+        return ok(Json.toJson(Response.OK()));
     }
 
     public Result transferToSuppression(Integer id) {
@@ -263,7 +266,9 @@ public class Lists extends Controller {
             return ok(Json.toJson(Response.OK(price.getPrice())));
         }
 
-        price = dataDAO.getPriceByType(table.getPhoneType(), table.getType(), 0);
+        int resellerId = getResellerId(userId);
+        price = dataDAO.getPriceByType(table.getPhoneType(), table.getType(), resellerId);
+
         if (price != null) {
             return ok(Json.toJson(Response.OK(price.getPrice())));
         }
@@ -275,7 +280,7 @@ public class Lists extends Controller {
         ListEntity list = Json.fromJson(request().body().asJson(), ListEntity.class);
         listDAO.updateList(list);
 
-        return ok(Json.toJson(Response.OK())) ;
+        return ok(Json.toJson(Response.OK()));
     }
 
     public Result deleteList(int id) {
@@ -296,11 +301,14 @@ public class Lists extends Controller {
         DataTable table = dataDAO.getTableByName(tableName);
 
         if (listDAO.isListMatched(listId)) {
-            try { return Float.parseFloat(
-                    dataDAO.getSettingByKey(
-                            "matched_price_" + table.getType(),
-                            resellerId).getValue()); }
-            catch (Exception e) {e.printStackTrace();}
+            try {
+                return Float.parseFloat(
+                        dataDAO.getSettingByKey(
+                                "matched_price_" + table.getType(),
+                                resellerId).getValue());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         Price price = dataDAO.getPriceByTypeAndUserId(table.getPhoneType(), table.getType(), userId);
@@ -352,7 +360,7 @@ public class Lists extends Controller {
             String resellerStripeKey = userDAO.getStripePublicKeyByResellerIdOnly(resellerId);
 
             if ((resellerShouldPayForUser(reseller != null ? reseller.getId() : 0) &&
-                    reseller.getBalance() < resellerTotalPrice ) ||
+                    reseller.getBalance() < resellerTotalPrice) ||
                     (resellerStripeKey != null && resellerStripeKey.length() > 0 &&
                             reseller != null && reseller.getBalance() < resellerTotalPrice)) {
                 return ok(Json.toJson(Response.ERROR("reseller balance")));
@@ -373,9 +381,9 @@ public class Lists extends Controller {
             list.setPcnt(0);
 
             listDAO.saveListWithoutItems(list);
-            try{
+            try {
                 listDAO.savePurchaseList(list);
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -426,7 +434,7 @@ public class Lists extends Controller {
     }
 
     private boolean resellerShouldPayForUser(int resellerId) {
-        for (int id: resellersShouldPayForUsers) {
+        for (int id : resellersShouldPayForUsers) {
             if (id == resellerId) {
                 return true;
             }
@@ -481,9 +489,9 @@ public class Lists extends Controller {
                 }
             }
         }
-        try{
-            listDAO.saveSentEmailList(list.getDate(),list.getName(),user.getEmail(),request.getEmailAddress());
-        }catch (Exception e){
+        try {
+            listDAO.saveSentEmailList(list.getDate(), list.getName(), user.getEmail(), request.getEmailAddress());
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -504,12 +512,12 @@ public class Lists extends Controller {
 
         long offset = 0;
         int limit = 100000;
-        List< Consumer > consumers = dataDAO.getConsumerListByPurchasedList(listId, tableName, offset, limit);
+        List<Consumer> consumers = dataDAO.getConsumerListByPurchasedList(listId, tableName, offset, limit);
         while (consumers.size() > 0) {
             for (int k = 0; k < consumers.size(); k++) {
                 Consumer consumer = consumers.get(k);
                 for (int i = 0; i < fields.length; i++) {
-                    Field field = fields[ i ];
+                    Field field = fields[i];
                     if (field.getName().equals("DOB_DATE") || field.getName().equals("id")) {
                         continue;
                     }
@@ -556,7 +564,7 @@ public class Lists extends Controller {
         if (data != null && data.length() > 0) {
             String[] parts = data.split(",");
 
-            for (String part: parts) {
+            for (String part : parts) {
                 results.add(part.trim());
             }
         }
@@ -588,7 +596,7 @@ public class Lists extends Controller {
                 }
             }
 
-            for (String savedColumn: savedColumns) {
+            for (String savedColumn : savedColumns) {
                 if (columns.contains(savedColumn) || columns.contains(savedColumn.toUpperCase())) {
                     printWriter.append(SEPARATOR).append(savedColumn);
                 }
@@ -620,7 +628,7 @@ public class Lists extends Controller {
             for (int k = 0; k < consumers.size(); k++) {
                 Consumer2 consumer = consumers.get(k);
                 for (int i = 0; i < fields.length; i++) {
-                    Field field = fields[ i ];
+                    Field field = fields[i];
                     if (field == null || field.getName() == null || field.getName().equals("id")) {
                         continue;
                     }
@@ -661,17 +669,17 @@ public class Lists extends Controller {
         }
     }
 
-    private Field[] generateFieldsArray(Field[] declaredFields, List< String > columns, List<String> savedColumns) {
+    private Field[] generateFieldsArray(Field[] declaredFields, List<String> columns, List<String> savedColumns) {
         List<Field> result = new LinkedList();
 
-        for (String column: columns) {
+        for (String column : columns) {
             boolean found = false;
 
             if (isSavedColumnsContain(savedColumns, column)) {
                 continue;
             }
 
-            for (Field field: declaredFields) {
+            for (Field field : declaredFields) {
                 if (field.getName().equalsIgnoreCase(column)) {
                     result.add(field);
 
@@ -696,7 +704,7 @@ public class Lists extends Controller {
     }
 
     private boolean isSavedColumnsContain(List<String> savedColumns, String column) {
-        for (String savedColumn: savedColumns) {
+        for (String savedColumn : savedColumns) {
             if (column.equalsIgnoreCase(savedColumn)) {
                 return true;
             }
@@ -725,12 +733,12 @@ public class Lists extends Controller {
 
         long offset = 0;
         int limit = 100000;
-        List< Facebook > facebooks = dataDAO.getFacebookListByPurchasedList(listId, tableName, offset, limit);
+        List<Facebook> facebooks = dataDAO.getFacebookListByPurchasedList(listId, tableName, offset, limit);
         while (facebooks.size() > 0) {
             for (int k = 0; k < facebooks.size(); k++) {
                 Facebook facebook = facebooks.get(k);
                 for (int i = 0; i < fields.length; i++) {
-                    Field field = fields[ i ];
+                    Field field = fields[i];
                     if (field.getName().equals("DOB_DATE") || field.getName().equals("id")) {
                         continue;
                     }
@@ -766,12 +774,12 @@ public class Lists extends Controller {
 
         long offset = 0;
         int limit = 100000;
-        List< Business > businesses = dataDAO.getBusinessListByPurchasedList(listId, tableName, offset, limit);
+        List<Business> businesses = dataDAO.getBusinessListByPurchasedList(listId, tableName, offset, limit);
         while (businesses.size() > 0) {
             for (int k = 0; k < businesses.size(); k++) {
                 Business business = businesses.get(k);
                 for (int i = 0; i < fields.length; i++) {
-                    Field field = fields[ i ];
+                    Field field = fields[i];
                     if (field.getName().equals("DOB_DATE") || field.getName().equals("id")) {
                         continue;
                     }
@@ -798,10 +806,10 @@ public class Lists extends Controller {
         if ("phoneType".equalsIgnoreCase(field.getName()) ||
                 "conPhoneType".equalsIgnoreCase(field.getName()) ||
                 "bisPhoneType".equalsIgnoreCase(field.getName())) {
-            printWriter.append((value != null && !MINUS_ONE.equals(value)) ? (ZERO.equals(value) ? "\"landline\"" : "\"mobile\"") :  "\"\"");
+            printWriter.append((value != null && !MINUS_ONE.equals(value)) ? (ZERO.equals(value) ? "\"landline\"" : "\"mobile\"") : "\"\"");
         } else if ("dnc".equalsIgnoreCase(field.getName())) {
             printWriter.append(Boolean.FALSE.equals(value) ? "\"clean\"" : "\"DNC\"");
-        }else if ("www".equalsIgnoreCase(field.getName())) {
+        } else if ("www".equalsIgnoreCase(field.getName())) {
             try {
                 if (value.toString().length() > 4) {
                     String s = value.toString().subSequence(value.toString().length() - 4, value.toString().length()).toString();
@@ -809,7 +817,7 @@ public class Lists extends Controller {
                         printWriter.append(value.toString().replace("2022", ""));
                     } else if (s.contains("2021")) {
                         printWriter.append(value.toString().replace("2021", ""));
-                    }else if (s.contains("2020")) {
+                    } else if (s.contains("2020")) {
                         printWriter.append(value.toString().replace("2020", ""));
                     } else if (s.contains("2019")) {
                         printWriter.append(value.toString().replace("2019", ""));
@@ -819,8 +827,7 @@ public class Lists extends Controller {
                 } else {
                     printWriter.append(value.toString());
                 }
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         } else if ("industry".equalsIgnoreCase(field.getName())) {
@@ -828,35 +835,37 @@ public class Lists extends Controller {
                 if (value.toString().contains("point_o")) {
                     String industry = "";
                     int pos = value.toString().indexOf("point_o");
-                    for(int i =0;i<pos;i++){
-                        industry+= value.toString().charAt(i);
+                    for (int i = 0; i < pos; i++) {
+                        industry += value.toString().charAt(i);
                     }
                     System.out.println("Index of str" + pos);
                     printWriter.append((industry));
-                }else {
+                } else {
                     printWriter.append((value.toString()));
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else if ("dobDate".equalsIgnoreCase(field.getName()) ||
+        } else if ("dobDate".equalsIgnoreCase(field.getName()) ||
                 "date".equalsIgnoreCase(field.getName()) ||
                 "PERSONDATEOFBIRTHDATE".equalsIgnoreCase(field.getName()) ||
                 "HOMEPURCHASEDATE".equalsIgnoreCase(field.getName())) {
             String result = "";
 
             try {
-                if ((long)value > -2204717475555l && (long)value != 0) {
+                if ((long) value > -2204717475555l && (long) value != 0) {
                     Date date = new Date((long) value + 24 * 60 * 60 * 1000l);
                     result = dateFormat.format(date);
                 }
-            } catch (Exception e) {e.printStackTrace();}
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             printWriter.append(result);
         } else if ("dob_date".equalsIgnoreCase(field.getName())) {
             String result = "";
             if (value != null) {
-                result = (System.currentTimeMillis() - (long)value) / (365l * 24 * 60 * 60 * 1000) + "";
+                result = (System.currentTimeMillis() - (long) value) / (365l * 24 * 60 * 60 * 1000) + "";
             }
 
             printWriter.append(result);
@@ -885,12 +894,12 @@ public class Lists extends Controller {
 
         long offset = 0;
         int limit = 100000;
-        List< Everydata > everydatas = dataDAO.getEverydataListByPurchasedList(listId, tableName, offset, limit);
+        List<Everydata> everydatas = dataDAO.getEverydataListByPurchasedList(listId, tableName, offset, limit);
         while (everydatas.size() > 0) {
             for (int k = 0; k < everydatas.size(); k++) {
                 Everydata everydata = everydatas.get(k);
                 for (int i = 0; i < fields.length; i++) {
-                    Field field = fields[ i ];
+                    Field field = fields[i];
                     if (field.getName().equals("id")) {
                         continue;
                     }
@@ -912,6 +921,7 @@ public class Lists extends Controller {
             everydatas = dataDAO.getEverydataListByPurchasedList(listId, tableName, offset, limit);
         }
     }
+
     private void generateDirectoryListCSVFile(ListEntity list,
                                               DownloadListRequest request,
                                               PrintWriter printWriter) throws Exception {
@@ -926,29 +936,29 @@ public class Lists extends Controller {
 
         long offset = 0;
         int limit = 100000;
-        List< Directory > directories = dataDAO.getDirectoryListByPurchasedList(listId, tableName, offset, limit);
+        List<Directory> directories = dataDAO.getDirectoryListByPurchasedList(listId, tableName, offset, limit);
         while (directories.size() > 0) {
             for (int k = 0; k < directories.size(); k++) {
                 Directory directory = directories.get(k);
                 //Clean industry field
-                try{
+                try {
                     String industryField = "";
-                    String[] industrieSplitted = directory.getINDUSTRY().replace(","," ").split(" ");
-                    for(int i =0;i<industrieSplitted.length;i++){
-                        if(i==industrieSplitted.length ||  i==industrieSplitted.length-1 && (industrieSplitted[i].equals("p") || industrieSplitted[i].equals("po") || industrieSplitted[i].equals("poi") || industrieSplitted[i].equals("poin") || industrieSplitted[i].equals("point"))){
+                    String[] industrieSplitted = directory.getINDUSTRY().replace(",", " ").split(" ");
+                    for (int i = 0; i < industrieSplitted.length; i++) {
+                        if (i == industrieSplitted.length || i == industrieSplitted.length - 1 && (industrieSplitted[i].equals("p") || industrieSplitted[i].equals("po") || industrieSplitted[i].equals("poi") || industrieSplitted[i].equals("poin") || industrieSplitted[i].equals("point"))) {
 
-                        }else{
-                            industryField+=industrieSplitted[i]+" ";
+                        } else {
+                            industryField += industrieSplitted[i] + " ";
                         }
 
                     }
                     directory.setINDUSTRY(industryField);
-                }catch (Exception e){
+                } catch (Exception e) {
 
                 }
 
                 for (int i = 0; i < fields.length; i++) {
-                    Field field = fields[ i ];
+                    Field field = fields[i];
                     if (field.getName().equals("id")) {
                         continue;
                     }
@@ -984,12 +994,12 @@ public class Lists extends Controller {
 
         long offset = 0;
         int limit = 100000;
-        List< WhoIs > whoIsList = dataDAO.getWhoIsListByPurchasedList(listId, tableName, offset, limit);
+        List<WhoIs> whoIsList = dataDAO.getWhoIsListByPurchasedList(listId, tableName, offset, limit);
         while (whoIsList.size() > 0) {
             for (int k = 0; k < whoIsList.size(); k++) {
                 WhoIs whoIsItem = whoIsList.get(k);
                 for (int i = 0; i < fields.length; i++) {
-                    Field field = fields[ i ];
+                    Field field = fields[i];
 
                     Object value = new PropertyDescriptor(field.getName(), WhoIs.class).getReadMethod().invoke(whoIsItem);
                     writeFieldValue(printWriter, field, value);
@@ -1022,12 +1032,12 @@ public class Lists extends Controller {
 
         long offset = 0;
         int limit = 100000;
-        List< CraigsList > craigslists = dataDAO.getCraiglistByPurchasedList(listId, tableName, offset, limit);
+        List<CraigsList> craigslists = dataDAO.getCraiglistByPurchasedList(listId, tableName, offset, limit);
         while (craigslists.size() > 0) {
             for (int k = 0; k < craigslists.size(); k++) {
                 CraigsList craigslistItem = craigslists.get(k);
                 for (int i = 0; i < fields.length; i++) {
-                    Field field = fields[ i ];
+                    Field field = fields[i];
 
                     Object value = new PropertyDescriptor(field.getName(), CraigsList.class).getReadMethod().invoke(craigslistItem);
                     writeFieldValue(printWriter, field, value);
@@ -1065,7 +1075,7 @@ public class Lists extends Controller {
                 request = new DownloadListRequest(
                         list.getId(),
                         list.getUserId(),
-                        new String[] {"COMPANY_NAME", "contact_name", "ADDRESS", "CITY", "STATE", "ZIP", "PHONE", "phoneType", "industry"},
+                        new String[]{"COMPANY_NAME", "contact_name", "ADDRESS", "CITY", "STATE", "ZIP", "PHONE", "phoneType", "industry"},
                         "");
             } else {
                 return ok("Your download list link is not valid anymore. Please use another link.");
@@ -1088,11 +1098,11 @@ public class Lists extends Controller {
                     generateBusinessListCSVFile(list, request, printWriter);
                 } else if (list.getType() == DataTable.DIRECTORY) {
                     generateDirectoryListCSVFile(list, request, printWriter);
-                }else if (list.getType() == DataTable.PHILDIRECTORY) {
+                } else if (list.getType() == DataTable.PHILDIRECTORY) {
                     generateDirectoryListCSVFile(list, request, printWriter);
-                }else if (list.getType() == DataTable.EVERYDATA) {
+                } else if (list.getType() == DataTable.EVERYDATA) {
                     generateEverydataListCSVFile(list, request, printWriter);
-                }  else if (list.getType() == DataTable.CRAIGSLIST) {
+                } else if (list.getType() == DataTable.CRAIGSLIST) {
                     generateCraigslistLisCSVFile(list, request, printWriter);
                 } else if (list.getType() == DataTable.WHOIS) {
                     generateWhoIsListCSVFile(list, request, printWriter);
@@ -1108,7 +1118,7 @@ public class Lists extends Controller {
                     generateOptInListCSVFile(list, request, printWriter);
                 } else if (list.getType() == DataTable.FACEBOOK) {
                     generateFacebookListCSVFile(list, request, printWriter);
-                }else if (list.getType() == DataTable.NEWOPTIN) {
+                } else if (list.getType() == DataTable.NEWOPTIN) {
                     generateNewOptInListCSVFile(list, request, printWriter);
                 } else if (list.getType() == DataTable.AUTO) {
                     generateAutoListCSVFile(list, request, printWriter);
@@ -1133,7 +1143,8 @@ public class Lists extends Controller {
 
                 try {
                     pos.close();
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                }
             }
         });
         readerThread.start();
@@ -1161,7 +1172,7 @@ public class Lists extends Controller {
             for (int k = 0; k < healthBuyerList.size(); k++) {
                 HealthBuyer healthBuyer = healthBuyerList.get(k);
                 for (int i = 0; i < fields.length; i++) {
-                    Field field = fields[ i ];
+                    Field field = fields[i];
                     if (field != null && field.getName().equals("id")) {
                         continue;
                     }
@@ -1203,7 +1214,7 @@ public class Lists extends Controller {
             for (int k = 0; k < healthInsuranceLeadsList.size(); k++) {
                 HealthInsuranceLead healthInsuranceLead = healthInsuranceLeadsList.get(k);
                 for (int i = 0; i < fields.length; i++) {
-                    Field field = fields[ i ];
+                    Field field = fields[i];
                     if (field != null && field.getName().equals("id")) {
                         continue;
                     }
@@ -1228,7 +1239,7 @@ public class Lists extends Controller {
 
     private String generateFileName(String name) {
         String result = "";
-        for (Character character: name.toCharArray()) {
+        for (Character character : name.toCharArray()) {
             if (!Character.isLetterOrDigit(character)) {
                 result = result + "-";
             } else {
@@ -1261,7 +1272,7 @@ public class Lists extends Controller {
             for (int k = 0; k < instagramRecords.size(); k++) {
                 Instagram instagramRecord = instagramRecords.get(k);
                 for (int i = 0; i < fields.length; i++) {
-                    Field field = fields[ i ];
+                    Field field = fields[i];
                     if (field.getName().equals("id")) {
                         continue;
                     }
@@ -1302,7 +1313,7 @@ public class Lists extends Controller {
             for (int k = 0; k < instagramRecords.size(); k++) {
                 Instagram2020 instagramRecord = instagramRecords.get(k);
                 for (int i = 0; i < fields.length; i++) {
-                    Field field = fields[ i ];
+                    Field field = fields[i];
                     if (field.getName().equals("id")) {
                         continue;
                     }
@@ -1343,7 +1354,7 @@ public class Lists extends Controller {
             for (int k = 0; k < autoList.size(); k++) {
                 Auto auto = autoList.get(k);
                 for (int i = 0; i < fields.length; i++) {
-                    Field field = fields[ i ];
+                    Field field = fields[i];
                     if (field != null && field.getName().equals("id")) {
                         continue;
                     }
@@ -1384,7 +1395,7 @@ public class Lists extends Controller {
             for (int k = 0; k < linkedInList.size(); k++) {
                 LinkedIn linkedIn = linkedInList.get(k);
                 for (int i = 0; i < fields.length; i++) {
-                    Field field = fields[ i ];
+                    Field field = fields[i];
                     if (field != null && field.getName().equals("id")) {
                         continue;
                     }
@@ -1425,7 +1436,7 @@ public class Lists extends Controller {
             for (int k = 0; k < businessDetailedList.size(); k++) {
                 BusinessDetailed businessDetailed = businessDetailedList.get(k);
                 for (int i = 0; i < fields.length; i++) {
-                    Field field = fields[ i ];
+                    Field field = fields[i];
                     if (field != null && field.getName().equals("id")) {
                         continue;
                     }
@@ -1466,7 +1477,7 @@ public class Lists extends Controller {
             for (int k = 0; k < studentList.size(); k++) {
                 Student student = studentList.get(k);
                 for (int i = 0; i < fields.length; i++) {
-                    Field field = fields[ i ];
+                    Field field = fields[i];
                     if (field != null && field.getName().equals("id")) {
                         continue;
                     }
@@ -1507,7 +1518,7 @@ public class Lists extends Controller {
             for (int k = 0; k < blackLists.size(); k++) {
                 BlackList blackList = blackLists.get(k);
                 for (int i = 0; i < fields.length; i++) {
-                    Field field = fields[ i ];
+                    Field field = fields[i];
                     if (field != null && field.getName().equals("id")) {
                         continue;
                     }
@@ -1548,7 +1559,7 @@ public class Lists extends Controller {
             for (int k = 0; k < optInRecords.size(); k++) {
                 NewOptIn optIn = optInRecords.get(k);
                 for (int i = 0; i < fields.length; i++) {
-                    Field field = fields[ i ];
+                    Field field = fields[i];
                     if (field != null && field.getName().equals("id")) {
                         continue;
                     }
@@ -1589,7 +1600,7 @@ public class Lists extends Controller {
             for (int k = 0; k < optInRecords.size(); k++) {
                 OptIn optIn = optInRecords.get(k);
                 for (int i = 0; i < fields.length; i++) {
-                    Field field = fields[ i ];
+                    Field field = fields[i];
                     if (field != null && field.getName().equals("id")) {
                         continue;
                     }
@@ -1625,12 +1636,12 @@ public class Lists extends Controller {
 
         long offset = 0;
         int limit = 100000;
-        List< SearchEngine > searchEngineRecords = dataDAO.getSearchEngineListByPurchasedList(listId, tableName, offset, limit);
+        List<SearchEngine> searchEngineRecords = dataDAO.getSearchEngineListByPurchasedList(listId, tableName, offset, limit);
         while (searchEngineRecords.size() > 0) {
             for (int k = 0; k < searchEngineRecords.size(); k++) {
                 SearchEngine searchEngineRecord = searchEngineRecords.get(k);
                 for (int i = 0; i < fields.length; i++) {
-                    Field field = fields[ i ];
+                    Field field = fields[i];
                     if (field.getName().equals("id")) {
                         continue;
                     }
@@ -1690,13 +1701,11 @@ public class Lists extends Controller {
 
 
     //creating a generic function that converts the Array into List
-    public static <T> List<T> ArrayToListConversion(T array[])
-    {
+    public static <T> List<T> ArrayToListConversion(T array[]) {
 //creating the constructor of the List class
         List<T> list = new ArrayList<>();
 //using for-each loop to iterate over the array
-        for (T t : array)
-        {
+        for (T t : array) {
 //adding each element to the List
             list.add(t);
         }
@@ -1705,9 +1714,9 @@ public class Lists extends Controller {
     }
 
 
-    public Result uploadTempFile(){
+    public Result uploadTempFile() {
         try {
-            List< String > tableColumns = new LinkedList<>();
+            List<String> tableColumns = new LinkedList<>();
             Http.MultipartFormData<File> body = request().body().asMultipartFormData();
             Http.MultipartFormData.FilePart<File> file = body.getFile("file");
 
@@ -1715,7 +1724,7 @@ public class Lists extends Controller {
             BufferedReader reader = new BufferedReader(new FileReader(listFile));
             String line = reader.readLine();
             String[] parts = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-            for(String part:parts){
+            for (String part : parts) {
                 System.out.println(part);
                 tableColumns.add(part);
             }
@@ -1725,7 +1734,7 @@ public class Lists extends Controller {
 
                 // listDAO.createGenericTempTable("test","testTableIndex",tableColumns);
                 while (line != null) {
-                    List<String> row =  ArrayToListConversion(line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
+                    List<String> row = ArrayToListConversion(line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
                     rows.add(row);
                     if (rows.size() % 100 == 0) {
                         System.out.println("size 100");
@@ -1737,10 +1746,9 @@ public class Lists extends Controller {
                 }
 
 
-
                 reader.close();
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -1750,8 +1758,8 @@ public class Lists extends Controller {
 
     public Result checkFile() {
         try {
-            Http.MultipartFormData< File > body = request().body().asMultipartFormData();
-            Http.MultipartFormData.FilePart< File > file = body.getFile("file");
+            Http.MultipartFormData<File> body = request().body().asMultipartFormData();
+            Http.MultipartFormData.FilePart<File> file = body.getFile("file");
             if (file != null) {
                 BufferedReader reader = new BufferedReader(new FileReader(file.getFile()));
                 String line = reader.readLine();
@@ -1763,7 +1771,7 @@ public class Lists extends Controller {
                 String[] parts = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
 
                 List<String> handledParts = new LinkedList();
-                for (String part: parts) {
+                for (String part : parts) {
                     handledParts.add(part.replaceAll("\"", ""));
                 }
 
@@ -1804,7 +1812,7 @@ public class Lists extends Controller {
                 long count = initCount;
                 long printedCount = 0;
 
-                List< UploadedListItem > items = new LinkedList();
+                List<UploadedListItem> items = new LinkedList();
 
                 Map<Long, Set<Long>> listsPhones = getUploadedListsPhones(listEntity);
 
@@ -1813,7 +1821,7 @@ public class Lists extends Controller {
                 String line = reader.readLine();
                 while (line != null) {
                     String[] parts = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-                    String phone = parts[ request.getColumn() ].replace("\"", "");
+                    String phone = parts[request.getColumn()].replace("\"", "");
                     if (!phone.equalsIgnoreCase("phone")) {
                         if (Application.isPhoneUnique(phone, listsPhones, 2)) {
                             items.add(new UploadedListItem(listId, phone));
@@ -1841,7 +1849,9 @@ public class Lists extends Controller {
                 listFile.delete();
 
                 //  Logger.info("Updating uploaded list {} done: {}", listEntity.getName(), count);
-            } catch (Exception e) { e.printStackTrace(); }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
         thread.start();
     }
@@ -1853,8 +1863,8 @@ public class Lists extends Controller {
         Map<Long, Set<Long>> result = new HashMap();
 
         List<String> phones = listDAO.getUploadedListsPhones(listEntity.getId(), offset, limit);
-        while(phones.size() > 0) {
-            for (String phone: phones) {
+        while (phones.size() > 0) {
+            for (String phone : phones) {
                 Application.isPhoneUnique(phone, result, 2);
             }
 
