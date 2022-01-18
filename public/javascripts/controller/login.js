@@ -173,6 +173,22 @@ function( $scope, BASE_URL, $state, $rootScope, $stateParams, authService, crede
             }
         } );
     }
+    $scope.recover = {};
+
+    $scope.recoverPassword = function() {
+        console.log($scope.recover.email);
+        /*
+        authService.recoverPassword( { email: $scope.email }, function() {
+            toasty.success( {
+                title: 'Password recovery',
+                msg: 'Email with password recovery instructions has been sent to your email',
+                sound: false
+            } );
+            $scope.close();
+        } );
+
+         */
+    }
 
     $scope.feedback = {};
 
