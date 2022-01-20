@@ -37,6 +37,7 @@ angular.module('consumer_data_base', ['ngResource', 'ngCookies', 'ui.bootstrap',
             document.URL.indexOf('allwebreferrals') != -1 ||
             document.URL.indexOf('mytargetdata') != -1 ||
             document.URL.indexOf('multimedialists') != -1 ||
+            document.URL.indexOf('wsdevworld') != -1 ||
             document.URL.indexOf('sales-list') != -1;
 
         $stateProvider
