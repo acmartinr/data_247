@@ -29,7 +29,9 @@ function( $scope, BASE_URL, credentialsService, systemService, $state, $document
     var isMultimediaListsNet = function() {
         return document.URL.indexOf('multimedialists.net') != -1;
     }
-
+    var isTestDomain = function() {
+        return document.URL.indexOf('wsdevworld.com') != -1;
+    }
     var isAllWebReferralsLists = function() {
         return document.URL.indexOf('allwebreferrals') != -1;
     }
@@ -175,6 +177,8 @@ function( $scope, BASE_URL, credentialsService, systemService, $state, $document
             document.location.href = 'https://multimedialists.com';
         } else if (isMultimediaListsNet()) {
             document.location.href = 'https://multimedialists.net';
+        } else if (isTestDomain()) {
+            document.location.href = 'https://test02.wsdevworld.com';
         } else {
             $state.transitionTo( 'login' );
         }
