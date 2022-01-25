@@ -97,10 +97,11 @@ public class EmailService {
             StringBuilder linkBuilder = new StringBuilder();
             if (reseller != null &&
                     ("axiomleads.com".equalsIgnoreCase(reseller.getDomains()) ||
-                     "multimedialists.com".equalsIgnoreCase(reseller.getDomains()) ||
                      "multimedialists.net".equalsIgnoreCase(reseller.getDomains()))) {
                 linkBuilder.append(webHost).append("/?token=").append(request.getUuid());
-            } else {
+            } else if(reseller != null && "multimedialists.com".equalsIgnoreCase(reseller.getDomains())) {
+                linkBuilder.append(webHost).append("/content_dashboard1/#/login?token=").append(request.getUuid());
+            }else{
                 linkBuilder.append(webHost).append("/#/login?token=").append(request.getUuid());
             }
 
