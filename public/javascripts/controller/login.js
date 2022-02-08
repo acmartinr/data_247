@@ -176,7 +176,7 @@ function( $scope, BASE_URL, $state, $rootScope, $stateParams, authService, crede
     $scope.recover = {};
 
     $scope.recoverPassword = function() {
-        authService.recoverPassword( { email: $scope.email }, function() {
+        authService.recoverPassword( { email: $scope.recover.email}, function() {
             toasty.success( {
                 title: 'Password recovery',
                 msg: 'Email with password recovery instructions has been sent to your email',
