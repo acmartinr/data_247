@@ -234,7 +234,7 @@ public class EmailService {
             if (reseller != null &&
                     ("multimedialists.com".equalsIgnoreCase(reseller.getDomains()) ||
                      "multimedialists.net".equalsIgnoreCase(reseller.getDomains()))) {
-                linkBuilder.append("/?pas_token=").append(token);
+                linkBuilder.append("/content_dashboard1/#/login?pas_token=").append(token);
             } else {
                 linkBuilder.append( "/#/login?pas_token=" ).append(token);
             }
