@@ -249,15 +249,21 @@ public class Data extends Controller {
                             messages.put(request.getUserId(), String.format("Process progress: %d ", paramsCountValue*100/totalLines) + " %");
 
                             params = readNextParamsButch(reader);
+
+                            System.out.println("counting:"+count.get());
+
                         }
 
                         finished.incrementAndGet();
+                        System.out.println("Thread:"+finished.get());
                     }
                 }).start();
             }
 
             while (finished.get() < threads) {
                 Thread.sleep(10000);
+                System.out.println("10s loop");
+                System.out.println("Thread:"+finished.get());
             }
 
             needToResetMatching.remove(request.getUserId());
