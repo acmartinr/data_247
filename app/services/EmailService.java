@@ -329,7 +329,7 @@ public class EmailService {
 
             Thread mailThread = new Thread(() -> {
                 try {
-                    String emailTo = "phil@everydata.com";
+                    String emailTo = "support@makemydata.com";
                     if (reseller != null && reseller.getNotificationEmail() != null && reseller.getNotificationEmail().length() > 0) {
                         emailTo = reseller.getNotificationEmail();
                     }
@@ -366,7 +366,7 @@ public class EmailService {
 
             Thread mailThread = new Thread(() -> {
                 try {
-                    String email = "phil@everydata.com";
+                    String email = "support@makemydata.com";
                     if (reseller != null) {
                         if (reseller.getNotificationEmail() != null && reseller.getNotificationEmail().length() > 0) {
                             email = reseller.getNotificationEmail();
@@ -445,7 +445,7 @@ public class EmailService {
             String content = emailBody;
             Thread mailThread = new Thread(() -> {
                 try {
-                    String emailTo = "phil@everydata.com";
+                    String emailTo = "support@makemydata.com";
                     if (reseller != null && reseller.getNotificationEmail() != null && reseller.getNotificationEmail().length() > 0) {
                         emailTo = reseller.getNotificationEmail();
                     }
@@ -499,7 +499,7 @@ public class EmailService {
 
                     Thread mailThread = new Thread(() -> {
                 try {
-                    String email = "phil@everydata.com";
+                    String email = "support@makemydata.com";
 
                     sendEmail(email, subject, emailBody, new EmailConfig(config) );
                 } catch ( Exception e ) {
