@@ -255,7 +255,7 @@ public class Data extends Controller {
                         }
 
                         finished.incrementAndGet();
-                        System.out.println("Thread:"+finished.get());
+                        System.out.println("finished:"+finished.get());
                     }
                 }).start();
             }
@@ -263,7 +263,8 @@ public class Data extends Controller {
             while (finished.get() < threads) {
                 Thread.sleep(10000);
                 System.out.println("10s loop");
-                System.out.println("Thread:"+finished.get());
+                System.out.println("finished:"+finished.get());
+                System.out.println("threads:"+threads);
             }
 
             needToResetMatching.remove(request.getUserId());
