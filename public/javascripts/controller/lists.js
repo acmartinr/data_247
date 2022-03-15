@@ -2608,7 +2608,114 @@ controller( 'BuyListModalController',
                     });
                 }
 
+
                 $scope.saveList = function() {
+
+                    if (!$scope.params.file) {
+                        $scope.loading = false;
+                        toasty.error( {
+                            title: 'Uploading file',
+                            msg: 'Please select file first',
+                            sound: false
+                        } );
+
+                        return;
+                    }
+                    $scope.columns = [];
+                    var fields = $scope.asArray($scope.selectedFields);
+                    for (var i = 0; i < fields.length; i++) {
+                        var found = false;
+                        for (var j = 0; j < $scope.fields.length; j++) {
+                            if (fields[i] == $scope.fields[j].name && $scope.saveFields.indexOf(fields[i]) === -1) {
+                                $scope.columns.push($scope.fields[j].value.toUpperCase());
+                                found = true;
+                                break;
+                            }
+                        }
+
+                        if (!found) {
+                            $scope.columns.push(fields[i]);
+                        }
+                    }
+
+                    if ($scope.columns.length === 0) {
+                        $scope.loading = false;
+                        toasty.error( {
+                            title: 'Uploading file',
+                            msg: 'Please select columns first',
+                            sound: false
+                        } );
+
+                        return;
+                    }
+
+                    var modalInstance = $modal.open( {
+                        templateUrl: BASE_URL + '/assets/partials/modal/save.list.html',
+                        controller: 'SaveListModalController',
+                    } );
+
+                    modalInstance.result.then( function( name ) {
+                        var fd = new FormData();
+                        fd.append( 'file', $scope.params.file );
+
+                        $http.post( BASE_URL + '/rest/public/lists/uploaded/file', fd, {
+                            transformRequest: angular.identity,
+                            headers: { 'Content-Type': undefined }
+                        } ).success( function( response ) {
+                            if ( response.status === 'OK' ) {
+                                $scope.params.filePath = response.message;
+                                //$scope.columns = response.data;
+
+                                var type = $scope.$root.types[$scope.dataType];
+
+                                var request = { 'name': name,
+                                    userId: credentialsService.getUser().id,
+                                    cnt: 0,
+                                    date: new Date().getTime(),
+                                    'type': type,
+                                    tableName: $scope.tableName.name,
+                                    filePath: $scope.params.filePath,
+                                    columns: $scope.columns,
+                                    filterDNC: $scope.config.filterDNC,
+                                    savedColumns: asString($scope.saveFields),
+                                    request: '{}' };
+
+
+                                toasty.info( {
+                                    title: localization.localize( 'lists.saving.in.progress' ),
+                                    msg: localization.localize( 'lists.saving.in.progress.message' ),
+                                    timeout: 10000,
+                                    sound: false
+                                } );
+
+                                dataService.saveMatchingList( request, function( response ) {
+                                    if ( response.status === 'OK' ) {
+                                        toasty.success( {
+                                            title: localization.localize( 'lists.saved.successfully' ),
+                                            msg: localization.localize( 'lists.saved.successfully.message' ),
+                                            timeout: 10000,
+                                            sound: false
+                                        });
+                                    }
+                                });
+
+
+                            } else {
+                                $scope.loading = false;
+                                toasty.error( {
+                                    title: 'Uploading file',
+                                    msg: 'Uploaded file has wrong format',
+                                    sound: false
+                                } );
+                            }
+
+                        });
+
+
+                    });
+                }
+
+                $scope.saveList_old = function() {
                     var modalInstance = $modal.open( {
                         templateUrl: BASE_URL + '/assets/partials/modal/save.list.html',
                         controller: 'SaveListModalController',

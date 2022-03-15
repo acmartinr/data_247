@@ -138,6 +138,8 @@ public class Data extends Controller {
                                     orConditions, generateData(Arrays.asList(paramParts), columns, savedColumns),
                                     list.getTableName(), list.getId());
 
+
+
                             orConditions.clear();
                             andCondition.clear();
                         }
@@ -164,11 +166,12 @@ public class Data extends Controller {
 
         list.setUserId(userId);
         listDAO.updateListUserId(list);
+        dataDAO.updateListCnt(list.getId());
 
         return ok(Json.toJson(Response.OK()));
     }
 
-    private String generateData(List<String> params,
+    private String  generateData(List<String> params,
                                 List<String> orderedColumns,
                                 List<String> savedColumns) {
         String result = "";
@@ -239,6 +242,7 @@ public class Data extends Controller {
 
                             List<List<DataRequest.Entity>> orConditions =
                                     generateMatchingOrCondition(params, request, systemColumns, columns);
+
                             if (orConditions.size() > 0) {
                                 count.addAndGet(dataDAO.getMatchingCount(orConditions, request.getTableName()));
                             }
@@ -250,21 +254,16 @@ public class Data extends Controller {
 
                             params = readNextParamsButch(reader);
 
-                            System.out.println("counting:"+count.get());
 
                         }
 
                         finished.incrementAndGet();
-                        System.out.println("finished:"+finished.get());
                     }
                 }).start();
             }
 
             while (finished.get() < threads) {
                 Thread.sleep(10000);
-                System.out.println("10s loop");
-                System.out.println("finished:"+finished.get());
-                System.out.println("threads:"+threads);
             }
 
             needToResetMatching.remove(request.getUserId());

@@ -582,6 +582,10 @@ public interface DataMapper {
     String getSettingsValueByKey(@Param("key") String key,
                                  @Param("resellerId") int resellerId);
 
+    @Select("UPDATE lists set cnt=(select count(id) from userListsItems where listId = #{listId}) where id = #{listId}")
+    String updateListCnt(@Param("listId") int listId);
+
+
     @Select("SELECT * FROM settings WHERE key=#{key} AND resellerId=#{resellerId} LIMIT 1")
     Setting getSettingByKey(@Param("key") String key,
                             @Param("resellerId") int resellerId);

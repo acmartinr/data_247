@@ -59,8 +59,8 @@
                 <div class='info-container top-0'>
                     <div class='info-container-header margin-bottom-3'>
                         <div class='matching-labels'>
-                            <span localized>geographic.count</span>
-                            <span ng-if='!loading'>{{formattedAmount(count)}}</span>
+                            <!-- <span localized>geographic.count</span>
+                             <span ng-if='!loading'>{{formattedAmount(count)}}</span>-->
                         </div>
                         <img class='margin-left' ng-if='loading' src='/assets/images/loading.gif'>
 
@@ -68,24 +68,29 @@
                                 ng-click='saveList()'
                                 tooltip='Click this button to save requested data to a new list'
                                 tooltip-popup-delay='500'
-                                ng-disabled="count === 0"
                                 localized>lists.save</button>
-
-                        <button class='btn btn-default right margin-right'
-                                tooltip="Click this button for stopping the current matching request"
-                                tooltip-popup-delay="500"
-                                ng-click='reset()'
-                                type='button'
-                                ng-if='loading'
-                                localized>Reset</button>
-
-                        <button class='btn btn-default right margin-right'
-                                tooltip='Click this button to get matched records count'
-                                tooltip-popup-delay='500'
-                                ng-click='getCount()'
-                                ng-if='!loading'
-                                localized>geographic.count.button</button>
+                        <!-- ng-disabled="count === 0"-->
                         <!--
+                       <button class='btn btn-default right margin-right'
+                               tooltip="Click this button for stopping the current matching request"
+                               tooltip-popup-delay="500"
+                               ng-click='reset()'
+                               type='button'
+                               ng-if='loading'
+                               localized>Reset</button>
+
+
+                       <button class='btn btn-default right margin-right'
+                               tooltip='Click this button to get matched records count'
+                               tooltip-popup-delay='500'
+                               ng-click='getCount()'
+                               ng-if='!loading'
+                               localized>geographic.count.button</button>
+                               -->
+                        <!--
+
+
+
                         <button class='btn btn-default right margin-right'
                                 tooltip='Click this button to import list'
                                 tooltip-popup-delay='500'

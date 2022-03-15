@@ -769,6 +769,10 @@ public class DataDAO {
     public void insertMatchedRecords(List<List<DataRequest.Entity>> orConditions, String data, String tableName, int listId) {
         mapper.insertMatchedRecords(orConditions, data, tableName, listId);
     }
+    public void updateListCnt(int listId) {
+        mapper.updateListCnt(listId);
+    }
+
 
     public String getSettingsValueByKey(String key, int resellerId) {
         String value = mapper.getSettingsValueByKey(key, resellerId);
