@@ -148,6 +148,7 @@ public class Data extends Controller {
 
                     long paramsCountValue = paramsCount.addAndGet(params.size());
                     try {
+                        //Put log with %
                         Logger.info(String.format("[Saving %s]: handled uploaded file lines: %d", list.getName(), paramsCountValue));
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -172,8 +173,8 @@ public class Data extends Controller {
     }
 
     private String  generateData(List<String> params,
-                                List<String> orderedColumns,
-                                List<String> savedColumns) {
+                                 List<String> orderedColumns,
+                                 List<String> savedColumns) {
         String result = "";
         for (String savedColumn: savedColumns) {
             savedColumn = savedColumn.trim();
@@ -203,7 +204,7 @@ public class Data extends Controller {
             int totalLines = lineNumberReader.getLineNumber();
             lineNumberReader.close();
 
-           // System.out.println("total lines"+totalLines);
+            // System.out.println("total lines"+totalLines);
 
             int threads = 1;
             AtomicInteger finished = new AtomicInteger();
@@ -317,10 +318,13 @@ public class Data extends Controller {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
             } else if ("ADDR".equalsIgnoreCase(column) || "address".equalsIgnoreCase(column) || "primaryaddress".equalsIgnoreCase(column)) {
                 String[] valueParts = value.split(" ");
-                if (valueParts.length > 0 && isNumber(valueParts[0])) {
+                if (valueParts.length == 1 && isNumber(valueParts[0])) {
                     andCondition.add(new DataRequest.Entity(column, valueParts[0] + " %", "ILIKE"));
+                } else if (valueParts.length > 1 && isNumber(valueParts[0])) {
+                    andCondition.add(new DataRequest.Entity(column, valueParts[0] + " "+valueParts[1] + " %", "ILIKE"));
                 } else {
                     andCondition.add(new DataRequest.Entity(column, value + "%", "ILIKE"));
                 }
