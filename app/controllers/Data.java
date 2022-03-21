@@ -329,7 +329,8 @@ public class Data extends Controller {
                     andCondition.add(new DataRequest.Entity(column, value + "%", "ILIKE"));
                 }
             } else if ("city".equalsIgnoreCase(column) || "cityname".equalsIgnoreCase(column)) {
-                andCondition.add(new DataRequest.Entity(column, WordUtils.capitalize(value.toLowerCase()), "="));
+              //  andCondition.add(new DataRequest.Entity(column, WordUtils.capitalize(value.toLowerCase()), "="));
+                andCondition.add(new DataRequest.Entity(column, value, "ILIKE"));
             } else {
                 andCondition.add(new DataRequest.Entity(column, value, "="));
             }
