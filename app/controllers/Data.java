@@ -332,7 +332,7 @@ public class Data extends Controller {
               //  andCondition.add(new DataRequest.Entity(column, WordUtils.capitalize(value.toLowerCase()), "="));
                 andCondition.add(new DataRequest.Entity(column, value, "ILIKE"));
             } else {
-                andCondition.add(new DataRequest.Entity(column, value, "="));
+                andCondition.add(new DataRequest.Entity(column, value, "ILIKE"));
             }
 
             if (filterDNC) {
