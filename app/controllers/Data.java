@@ -305,7 +305,8 @@ public class Data extends Controller {
         List<DataRequest.Entity> andCondition = new LinkedList();
         for (int index = 0; index < systemColumns.size(); index++) {
             String column = systemColumns.get(index);
-            String value = paramParts[columns.indexOf(column)];
+            //String value = paramParts[columns.indexOf(column)];
+            String value = paramParts[columns.indexOf(column)].replace("%","");
 
             if (column.equalsIgnoreCase("personlastname") ||
                     column.equalsIgnoreCase("personfirstname")) {
@@ -316,7 +317,7 @@ public class Data extends Controller {
                 try {
                     andCondition.add(new DataRequest.Entity(column, Integer.parseInt(value), "="));
                 } catch (Exception e) {
-                    e.printStackTrace();
+                     e.printStackTrace();
                 }
 
             } else if ("ADDR".equalsIgnoreCase(column) || "address".equalsIgnoreCase(column) || "primaryaddress".equalsIgnoreCase(column)) {
