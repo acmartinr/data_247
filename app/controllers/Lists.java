@@ -1084,7 +1084,44 @@ public class Lists extends Controller {
 
         return generateListFile(list, request);
     }
+    public Result downloadUploadList(String fileName, int listId) throws Exception {
+        DownloadListRequest request = registeredDownloadRequestsMap.get(listId);
+        ListEntity list = listDAO.findUploadListById(listId);
 
+        PipedOutputStream pos = new PipedOutputStream();
+        PipedInputStream pis = new PipedInputStream(pos);
+        Thread readerThread = new Thread(() -> {
+            try {
+                PrintWriter printWriter = new PrintWriter(pos);
+                printWriter.append("\"" + "Phone"+ "\"");
+                printWriter.append(NEW_LINE);
+                List<UploadedListItem> lu = listDAO.findUploadListItems(list.getId());
+                for (int i = 0; i < lu.size(); i++) {
+                   // System.out.println(lu.get(i));
+                       printWriter.append("\"" + lu.get(i).getPhone()+ "\"");
+                       printWriter.append(NEW_LINE);
+
+                }
+                printWriter.flush();
+                pos.close();
+            }catch (Exception e){
+                e.printStackTrace();
+
+                try {
+                    pos.close();
+                } catch (Exception ex) {
+                }
+            }
+
+
+        });
+
+        readerThread.start();
+
+        response().setHeader("Content-disposition", "attachment; filename=" +
+                generateFileName(list.getName()) + ".csv");
+        return ok(pis).as("text/csv");
+    }
     private Result generateListFile(ListEntity list, DownloadListRequest request) throws Exception {
         PipedOutputStream pos = new PipedOutputStream();
         PipedInputStream pis = new PipedInputStream(pos);
@@ -1675,6 +1712,21 @@ public class Lists extends Controller {
         }
 
         return ok(Json.toJson(Response.ERROR()));
+    }
+
+    public Result getDownloadUploadListsByUserId() {
+        DownloadListRequest request = Json.fromJson(request().body().asJson(), DownloadListRequest.class);
+        User user = userDAO.findUserById(request.getUserId());
+
+
+        ListEntity list = listDAO.findUploadListById(request.getListId());
+        if (list == null || (list.getUserId() != request.getUserId() && user.getRole() == User.ROLE_USER)) {
+            return ok(Json.toJson(Response.ERROR()));
+        }
+
+        registeredDownloadRequestsMap.put(list.getId(), request);
+
+        return ok(Json.toJson(Response.OK(list.getId())));
     }
 
     public Result getAllUploadedListsByUserId(int userId) {

@@ -200,6 +200,12 @@ public class ListDAO {
     public ListEntity findListById(int listId) {
         return mapper.findListById(listId);
     }
+    public ListEntity findUploadListById(int listId) {
+        return mapper.findUploadListById(listId);
+    }
+    public List<UploadedListItem> findUploadListItems(int listId) {
+        return mapper.findUploadListItems(listId);
+    }
 
     public void updateCountById(int listId, long cnt) {
         mapper.updateCountById(listId, cnt);

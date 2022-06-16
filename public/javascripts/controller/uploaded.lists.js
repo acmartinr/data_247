@@ -60,7 +60,9 @@ function( $scope, $state, BASE_URL, listService, credentialsService, confirm, lo
             } )
         } );
     }
-
+    $scope.getAccauntName = function () {
+        return credentialsService.getUserName();
+    }
     $scope.removeList = function( list ) {
         confirm.getUserConfirmation( localization.localize( 'lists.delete.confirm') , function() {
             listService.deleteUploadedList( { id: list.id }, function( response ) {
@@ -70,11 +72,43 @@ function( $scope, $state, BASE_URL, listService, credentialsService, confirm, lo
                         msg: localization.localize( 'lists.deleted.successfully.message' ),
                         sound: false
                     } );
-
                     updateLists();
                 }
             } )
-        } );
+        });
+    }
+
+    $scope.downloadLists = function( list ) {
+        listService.downloadUploadedList( { listId: list.id,
+                userId: credentialsService.getUser().id,
+                'columns': ["phone"],
+                'code': "1" },
+            function( response ) {
+                if ( response.status === 'OK' ) {
+                    $scope.downloadingInProgress = false;
+                    $scope.downloadListId = undefined;
+
+                    var path = BASE_URL + '/rest/public/lists/downloadupload/' + list.id + '/' + response.message;
+                    var frame = angular.element('<iframe src="' + path + '" style="display: none;" ></iframe>' );
+                    angular.element(document.getElementById('hidden_frame')).append(frame);
+
+                    toasty.success( {
+                        title: 'Writing data completed',
+                        msg: 'Data has been written to file successfully',
+                        sound: false,
+                        timeout: 5000,
+                    } );
+                } else {
+                    toasty.error( {
+                        title: localization.localize( 'lists.download.error' ),
+                        msg: localization.localize( 'lists.download.error.message' ),
+                        sound: false
+                    } );
+                }
+
+                if ( $scope.interval ) $interval.cancel( $scope.interval );
+                listId = undefined;
+            } );
     }
 
     $scope.uploadList = function() {

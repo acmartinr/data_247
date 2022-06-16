@@ -33,6 +33,12 @@ public interface ListMapper {
     @Select( "SELECT * FROM lists WHERE id = #{listId}" )
     ListEntity findListById( @Param( "listId" ) int listId );
 
+    @Select( "SELECT * FROM uploadedlists WHERE id = #{listId}" )
+    ListEntity findUploadListById( @Param( "listId" ) int listId );
+
+    @Select( "SELECT phone FROM uploadedlistsitems WHERE listid = #{listId}" )
+    List<UploadedListItem> findUploadListItems( @Param( "listId" ) int listId );
+
     @Update( "UPDATE lists SET cnt = #{cnt} WHERE id = #{listId}" )
     void updateCountById( @Param( "listId" ) int listId,
                           @Param( "cnt" ) long cnt );

@@ -131,6 +131,7 @@ GET     /rest/public/lists/price/:id            @controllers.Lists.getListItemPr
 GET     /rest/public/lists/transfer/:id         @controllers.Lists.transferToSuppression(id: Integer)
 
 GET     /rest/public/lists/uploaded/:id         @controllers.Lists.getUploadedListsByUserId(id: Integer)
+POST     /rest/public/lists/prepare/downloadupload         @controllers.Lists.getDownloadUploadListsByUserId()
 GET     /rest/public/lists/uploaded/all/:id     @controllers.Lists.getAllUploadedListsByUserId(id: Integer)
 PUT     /rest/public/lists/uploaded             @controllers.Lists.updateUploadedList()
 DELETE  /rest/public/lists/uploaded/:id         @controllers.Lists.deleteUploadedList(id: Integer)
@@ -141,6 +142,7 @@ POST    /rest/public/lists/prepare/download     @controllers.Lists.prepareListFo
 POST    /rest/public/lists/prepare/email        @controllers.Lists.sendDownloadListEmail()
 POST    /rest/public/lists/download/            @controllers.Lists.downloadListDirectly()
 GET     /rest/public/lists/download/:id/:name   @controllers.Lists.downloadList(name: String, id: Integer)
+GET     /rest/public/lists/downloadupload/:id/:name   @controllers.Lists.downloadUploadList(name: String, id: Integer)
 GET     /rest/public/lists/prepared/:id         @controllers.Lists.getPreparedCount(id: Integer)
 
 GET     /rest/public/administration/resellers          @controllers.Administration.getResellers()

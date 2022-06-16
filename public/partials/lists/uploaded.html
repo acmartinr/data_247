@@ -44,7 +44,7 @@
                             <span ng-if='config.sortValue === "date" && !config.sortDesc' class="glyphicon glyphicon-sort-by-attributes"></span>
                         </th>
 
-                        <th localized class='actions-column'>lists.actions</th>
+                        <th localized class='actions-column-4'>lists.actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -70,6 +70,11 @@
                                     type='button' class='btn btn-default' ng-click='removeList(list)'>
                                 <span class='glyphicon glyphicon-trash'></span>
                             </button>
+                            <button ng-if='getAccauntName() == "admin" || getAccauntName() == "phil"' tooltip='Click this button to download this list'
+                                    tooltip-popup-delay='500'
+                                    type='button' class='btn btn-default' ng-click='downloadLists(list)'>
+                                <span class='glyphicon glyphicon-download-alt'></span>
+                            </button>
                         </td>
                     </tr>
                     </tbody>
@@ -81,4 +86,5 @@
             </div>
         </div>
     </div>
+    <div id='hidden_frame' style='display:none'></div>
 </div>

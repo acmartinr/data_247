@@ -20,6 +20,7 @@ factory( 'listService', function( $resource, BASE_URL ) {
         updateUploadedList:   { url: BASE_URL + '/rest/public/lists/uploaded', method: 'PUT' },
         saveUploadedList:     { url: BASE_URL + '/rest/public/lists/uploaded', method: 'POST' },
         deleteUploadedList:   { url: BASE_URL + '/rest/public/lists/uploaded/:id', method: 'DELETE' },
+        downloadUploadedList:   { url: BASE_URL + '/rest/public/lists/prepare/downloadupload', method: 'POST' },
         getListItemPrice:     { url: BASE_URL + '/rest/public/lists/price/:id', method: 'GET' },
         transferToSuppression: { url: BASE_URL + '/rest/public/lists/transfer/:id', method: 'GET' },
         getTableItemPrice:    { url: BASE_URL + '/rest/public/lists/price/table/:table/:userId', method: 'GET'},
