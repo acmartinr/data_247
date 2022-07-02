@@ -2545,7 +2545,7 @@ public class Application extends Controller {
             case DataTable.BUSINESS_DETAILED:
                 return importData(path,
                         tableName,
-                        '|',
+                        ',',
                         skipRecords,
                         DataTable.BUSINESS_DETAILED,
                         BusinessDetailed.class,
