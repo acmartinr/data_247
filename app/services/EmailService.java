@@ -80,9 +80,10 @@ public class EmailService {
                         emailConfig = EmailConfig.forMakeTheData(config);
                         break;
                     case "mytargetdata.com":
-                        webHost = "https://www.mytargetdata.com";
+                    case "aileads.net":
+                        webHost = "https://www.aileads.net";
                         domain = "MyTargetData";
-                        adminEmail = "admin@mytargetdata.com";
+                        adminEmail = "admin@aileads.net";
                         emailConfig = EmailConfig.forMakeTheData(config);
                         break;
                     case "sales-list.com":
@@ -201,9 +202,10 @@ public class EmailService {
                         emailConfig = EmailConfig.forMakeTheData(config);
                         break;
                     case "mytargetdata.com":
-                        webHost = "https://www.mytargetdata.com";
+                    case "aileads.net":
+                        webHost = "https://aileads.net";
                         domain = "MyTargetData";
-                        adminEmail = "admin@mytargetdata.com";
+                        adminEmail = "admin@aileads.net";
                         emailConfig = EmailConfig.forMakeTheData(config);
                         break;
                     case "sales-list.com":
@@ -282,7 +284,8 @@ public class EmailService {
                         adminEmail = "support@multimedialists.com";
                         break;
                     case "mytargetdata.com":
-                        adminEmail = "support@mytargetdata.com";
+                    case "aileads.net":
+                        adminEmail = "support@aileads.net";
                         break;
                     case "sales-list.com":
                         adminEmail = "admin@sales-list.com";

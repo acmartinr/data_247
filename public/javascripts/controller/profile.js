@@ -91,7 +91,7 @@ function( $scope, BASE_URL, credentialsService, profileService, systemService, l
     }
 
     $scope.isPaymentAvailable = function() {
-        return document.URL.indexOf("mytargetdata.com") == -1 && $scope.allowPayments;
+        return document.URL.indexOf("aileads.net") == -1 && $scope.allowPayments;
     }
 
     $scope.doPayment = function() {

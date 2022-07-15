@@ -37,7 +37,7 @@ function( $scope, BASE_URL, credentialsService, systemService, $state, $document
     }
 
     var isMyTargetData = function() {
-        return document.URL.indexOf('mytargetdata') != -1;
+        return document.URL.indexOf('aileads') != -1;
     }
 
     var isSalesListData = function() {
@@ -159,7 +159,7 @@ function( $scope, BASE_URL, credentialsService, systemService, $state, $document
         document.title = 'Multimedia Lists';
     } else if (document.URL.indexOf('allwebreferrals') != -1 ){
         document.title = 'Data All Web Referrals';
-    } else if (document.URL.indexOf('mytargetdata') != -1){
+    } else if (document.URL.indexOf('aileads') != -1){
         document.title = 'My Target Data';
     } else if (document.URL.indexOf('sales-list') != -1){
         document.title = 'SalesList';
