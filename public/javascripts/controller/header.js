@@ -160,10 +160,12 @@ function( $scope, BASE_URL, credentialsService, systemService, $state, $document
     } else if (document.URL.indexOf('allwebreferrals') != -1 ){
         document.title = 'Data All Web Referrals';
     } else if (document.URL.indexOf('aileads') != -1){
-        document.title = 'My Target Data';
+        document.title = 'AI Leads';
     } else if (document.URL.indexOf('sales-list') != -1){
         document.title = 'SalesList';
-    } else {
+    } else if (document.URL.indexOf('aileads') != -1){
+        document.title = 'AI Leads';
+    }else {
         document.title = "Make My Data";
     }
 
