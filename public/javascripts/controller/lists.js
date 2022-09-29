@@ -368,7 +368,7 @@ controller( 'ListsController',
                         userId: credentialsService.getUser().id,
                         'columns': columns,
                         'code': code,
-                        'emailAddreess':emailAddreess},
+                        'emailAddress':emailAddreess},
                     function(response) {
                         $scope.downloadingInProgress = false;
                         $scope.downloadListId = undefined;
