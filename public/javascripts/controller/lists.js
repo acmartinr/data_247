@@ -1749,7 +1749,7 @@ controller( 'BuyListModalController',
                 $modalInstance.dismiss();
             }
 
-            $scope.maxListSize = 1000000;
+            $scope.maxListSize = 10;
             $scope.showErrorMessage = false;
             $scope.checkListSize = function() {
                 return $scope.showErrorMessage;
@@ -1806,7 +1806,7 @@ controller( 'BuyListModalController',
                     $scope.amount = ( $scope.total * $scope.pricePerItem ).toFixed( 2 );
                 }
 
-                if ( parseInt($scope.total) > $scope.maxListSize ) {
+                if ( (parseInt($scope.total) > $scope.maxListSize) && !(credentialsService.getUser().admin > 0)) {
                     $scope.showErrorMessage = true;
 
                     $scope.amount = ( $scope.total * $scope.pricePerItem ).toFixed( 2 );
