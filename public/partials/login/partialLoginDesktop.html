@@ -466,7 +466,8 @@
     </div>
     <div class="container">
         <div class="row mt-5">
-            <div id="collapseExample"  class='comments collapse' ng-class="{'border-bottom': comments.indexOf(comment) != comments.length - 1}" ng-repeat="comment in comments">
+           <!-- <div id="collapseExample"  class='comments collapse' ng-class="{'border-bottom': comments.indexOf(comment) != comments.length - 1}" ng-repeat="comment in comments">  comments visible by default-->
+            <div id="collapseExample"  class='comments' ng-class="{'border-bottom': comments.indexOf(comment) != comments.length - 1}" ng-repeat="comment in comments">
                 <p style="font-family: 'Source Sans Pro SemiBold'; font-size: 20px;color: #707070" class='comment-name'>{{comment.name}}</p>
                 <p style="font-family: 'Source Sans Pro'; font-size: 18px;color: #707070" class='comment-value'>{{comment.comment}}</p>
                 <p style="font-family: 'Source Sans Pro'; font-size: 18px;color: #707070" class='comment-date'>
