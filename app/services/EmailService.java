@@ -24,11 +24,14 @@ import views.html.email.payment;
 import views.html.email.feedback;
 import views.html.email.purchased;
 import views.html.email.download;
+import views.html.email.payment_notif;
 import views.html.email.campaign;
 
 import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -40,7 +43,7 @@ public class EmailService {
     public void sendRegistrationEmail(RegistrationRequest request, User reseller) {
         try {
             final Config config = ConfigFactory.load();
-            String webHost = config.getString( "app.web.host" );
+            String webHost = config.getString("app.web.host");
 
             String domain = "MakeMyData";
             String adminEmail = "support@makemydata.com";
@@ -98,17 +101,17 @@ public class EmailService {
             StringBuilder linkBuilder = new StringBuilder();
             if (reseller != null &&
                     ("axiomleads.com".equalsIgnoreCase(reseller.getDomains()) ||
-                     "multimedialists.net".equalsIgnoreCase(reseller.getDomains()))) {
+                            "multimedialists.net".equalsIgnoreCase(reseller.getDomains()))) {
                 linkBuilder.append(webHost).append("/?token=").append(request.getUuid());
-            } else if(reseller != null && "multimedialists.com".equalsIgnoreCase(reseller.getDomains())) {
+            } else if (reseller != null && "multimedialists.com".equalsIgnoreCase(reseller.getDomains())) {
                 linkBuilder.append(webHost).append("/content_dashboard1/#/login?token=").append(request.getUuid());
-            }else{
+            } else {
                 linkBuilder.append(webHost).append("/#/login?token=").append(request.getUuid());
             }
 
-            Logger.info( "Registration link: " + linkBuilder.toString() );
+            Logger.info("Registration link: " + linkBuilder.toString());
 
-            String emailBody = registration.render(linkBuilder.toString(), domain, adminEmail ).toString();
+            String emailBody = registration.render(linkBuilder.toString(), domain, adminEmail).toString();
 
             EmailConfig finalEmailConfig = emailConfig;
             String finalDomain = domain;
@@ -119,13 +122,13 @@ public class EmailService {
                             String.format("Email Validation: %s", finalDomain),
                             emailBody,
                             finalEmailConfig);
-                } catch ( Exception e ) {
-                    Logger.error( "Error on sending registration email: ", e );
+                } catch (Exception e) {
+                    Logger.error("Error on sending registration email: ", e);
                 }
             });
             mailThread.start();
-        } catch ( Exception e ) {
-            Logger.error( "Error on sending registration email: ", e );
+        } catch (Exception e) {
+            Logger.error("Error on sending registration email: ", e);
         }
     }
 
@@ -175,7 +178,7 @@ public class EmailService {
     public void sendRecoveryPasswordEmail(String email, String token, User reseller) {
         try {
             Config config = ConfigFactory.load();
-            String webHost = config.getString( "app.web.host" );
+            String webHost = config.getString("app.web.host");
 
             String domain = "MakeMyData.com";
             String adminEmail = "admin@makemydata.com";
@@ -231,18 +234,18 @@ public class EmailService {
             }
 
             StringBuilder linkBuilder = new StringBuilder();
-            linkBuilder.append( webHost );
+            linkBuilder.append(webHost);
 
             if (reseller != null &&
                     ("multimedialists.com".equalsIgnoreCase(reseller.getDomains()) ||
-                     "multimedialists.net".equalsIgnoreCase(reseller.getDomains()))) {
+                            "multimedialists.net".equalsIgnoreCase(reseller.getDomains()))) {
                 linkBuilder.append("/content_dashboard1/#/login?pas_token=").append(token);
             } else {
-                linkBuilder.append( "/#/login?pas_token=" ).append(token);
+                linkBuilder.append("/#/login?pas_token=").append(token);
             }
 
 
-            Logger.info( "Recovery link: " + linkBuilder.toString() );
+            Logger.info("Recovery link: " + linkBuilder.toString());
 
             String emailBody = recovery.render(linkBuilder.toString(), domain, adminEmail).toString();
 
@@ -250,13 +253,13 @@ public class EmailService {
             Thread mailThread = new Thread(() -> {
                 try {
                     sendEmail(email, "Password recovery", emailBody, finalEmailConfig);
-                } catch ( Exception e ) {
-                    Logger.error( "Error on sending registration email: ", e );
+                } catch (Exception e) {
+                    Logger.error("Error on sending registration email: ", e);
                 }
             });
             mailThread.start();
-        } catch ( Exception e ) {
-            Logger.error( "Error on sending registration email: ", e );
+        } catch (Exception e) {
+            Logger.error("Error on sending registration email: ", e);
         }
     }
 
@@ -298,9 +301,9 @@ public class EmailService {
 
             StringBuilder linkBuilder = new StringBuilder();
             linkBuilder.append("https://makemydata.com/rest/public/lists/download/").
-                        append(list.getId()).
-                        append('/').
-                        append(URLEncoder.encode(list.getName(), "UTF-8"));
+                    append(list.getId()).
+                    append('/').
+                    append(URLEncoder.encode(list.getName(), "UTF-8"));
 
             String emailBody = download.render(linkBuilder.toString(), title, adminEmail).toString();
 
@@ -308,27 +311,87 @@ public class EmailService {
             Thread mailThread = new Thread(() -> {
                 try {
                     sendEmail(email, "Your list download link is ready", emailBody, finalEmailConfig);
-                } catch ( Exception e ) {
-                    Logger.error( "Error on sending registration email: ", e );
+                } catch (Exception e) {
+                    Logger.error("Error on sending registration email: ", e);
                 }
             });
             mailThread.start();
-        } catch ( Exception e ) {
-            Logger.error( "Error on sending registration email: ", e );
+        } catch (Exception e) {
+            Logger.error("Error on sending registration email: ", e);
         }
 
     }
+
+    public void sendPaymentEmailtoUser(String email, User reseller) {
+        try {
+            Config config = ConfigFactory.load();
+
+            String adminEmail = "support@makemydata.com";
+            if (reseller != null && reseller.getDomains() != null) {
+                switch (reseller.getDomains()) {
+                    case "makedatalist.com":
+                        adminEmail = "support@makedatalist.com";
+                        break;
+                    case "makethedata.com":
+                        adminEmail = "support@makethedata.com";
+                        break;
+                    case "reidatalist.com":
+                        adminEmail = "support@reidatalist.com";
+                        break;
+                    case "axiomleads.com":
+                        adminEmail = "support@axiomleads.com";
+                        break;
+                    case "multimedialists.com":
+                    case "multimedialists.net":
+                        adminEmail = "support@multimedialists.com";
+                        break;
+                    case "mytargetdata.com":
+                    case "aileads.net":
+                        adminEmail = "support@aileads.net";
+                        break;
+                    case "sales-list.com":
+                        adminEmail = "admin@sales-list.com";
+                        break;
+                }
+            }
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+            LocalDateTime now = LocalDateTime.now();
+
+            String title = "You just made a payment to " + adminEmail+"\n"+"Date: "+dtf.format(now);
+
+            EmailConfig emailConfig = new EmailConfig(config);
+
+            StringBuilder linkBuilder = new StringBuilder();
+
+            String emailBody = payment_notif.render(linkBuilder.toString(), title, adminEmail).toString();
+
+            EmailConfig finalEmailConfig = emailConfig;
+
+            Thread mailThread = new Thread(() -> {
+                try {
+                    sendEmail(email, "You just made a payment", emailBody, finalEmailConfig);
+                } catch (Exception e) {
+                    Logger.error("Error on sending registration email: ", e);
+                }
+            });
+            mailThread.start();
+        } catch (Exception e) {
+            Logger.error("Error on sending registration email: ", e);
+        }
+
+    }
+
 
     public void sendNewPaymentEmail(User user, float amount, User reseller) {
         try {
             Config config = ConfigFactory.load();
 
-            String subject = String.format( "User (%s %s) paid $%.2f", user.getUsername(), user.getEmail(), amount );
+            String subject = String.format("User (%s %s) paid $%.2f", user.getUsername(), user.getEmail(), amount);
 
-            String userValue = String.format( "%s (%s)", user.getUsername(), user.getEmail() );
-            String amountValue = String.format( "%.2f", amount );
+            String userValue = String.format("%s (%s)", user.getUsername(), user.getEmail());
+            String amountValue = String.format("%.2f", amount);
 
-            String emailBody = payment.render( userValue, amountValue ).toString();
+            String emailBody = payment.render(userValue, amountValue).toString();
 
             Thread mailThread = new Thread(() -> {
                 try {
@@ -337,14 +400,14 @@ public class EmailService {
                         emailTo = reseller.getNotificationEmail();
                     }
 
-                    sendEmail(emailTo, subject, null, null, emailBody, new EmailConfig(config) );
-                } catch ( Exception e ) {
-                    Logger.error( "Error on sending registration email: ", e );
+                    sendEmail(emailTo, subject, null, null, emailBody, new EmailConfig(config));
+                } catch (Exception e) {
+                    Logger.error("Error on sending registration email: ", e);
                 }
             });
             mailThread.start();
-        } catch ( Exception e ) {
-            Logger.error( "Error on sending registration email: ", e );
+        } catch (Exception e) {
+            Logger.error("Error on sending registration email: ", e);
         }
     }
 
@@ -357,7 +420,7 @@ public class EmailService {
             String subject = String.format("%s's feedback", name);
             String[] linesArray = feedbackRequest.getMessage().split("\n");
             List<String> lines = new LinkedList();
-            for (String line: linesArray) {
+            for (String line : linesArray) {
                 lines.add(line);
             }
 
@@ -382,14 +445,14 @@ public class EmailService {
                             email,
                             subject,
                             emailBody,
-                            new EmailConfig(config) );
-                } catch ( Exception e ) {
-                    Logger.error( "Error on sending feedback email: ", e );
+                            new EmailConfig(config));
+                } catch (Exception e) {
+                    Logger.error("Error on sending feedback email: ", e);
                 }
             });
             mailThread.start();
-        } catch ( Exception e ) {
-            Logger.error( "Error on sending feedback email: ", e );
+        } catch (Exception e) {
+            Logger.error("Error on sending feedback email: ", e);
         }
     }
 
@@ -409,14 +472,14 @@ public class EmailService {
             Thread mailThread = new Thread(() -> {
                 try {
                     String email = reseller.getNotificationEmail();
-                    sendEmail( email, finalSubject, emailBody, new EmailConfig(config) );
-                } catch ( Exception e ) {
-                    Logger.error( "Error on sending list purchased email: ", e );
+                    sendEmail(email, finalSubject, emailBody, new EmailConfig(config));
+                } catch (Exception e) {
+                    Logger.error("Error on sending list purchased email: ", e);
                 }
             });
             mailThread.start();
-        } catch ( Exception e ) {
-            Logger.error( "Error on sending list purchased email: ", e );
+        } catch (Exception e) {
+            Logger.error("Error on sending list purchased email: ", e);
         }
     }
 
@@ -426,8 +489,8 @@ public class EmailService {
         try {
             sendEmail(email, request.getSubject(), request.getBody(), new EmailConfig(
                     config, request.getFrom(), request.getFromName(), request.getReply()));
-        } catch ( Exception e ) {
-            Logger.error( "Error on sending bulk email: ", e );
+        } catch (Exception e) {
+            Logger.error("Error on sending bulk email: ", e);
         }
     }
 
@@ -442,7 +505,7 @@ public class EmailService {
 
             if (reseller != null &&
                     (reseller.getNotificationEmail() == null || reseller.getNotificationEmail().length() == 0)) {
-                emailBody =  emailBody + "Reseller: " + reseller.getUsername() + "<br/>";
+                emailBody = emailBody + "Reseller: " + reseller.getUsername() + "<br/>";
             }
 
             String content = emailBody;
@@ -453,14 +516,14 @@ public class EmailService {
                         emailTo = reseller.getNotificationEmail();
                     }
 
-                    sendEmail(emailTo, subject, null, null, content, new EmailConfig(config) );
-                } catch ( Exception e ) {
-                    Logger.error( "Error on sending user has been registered email: ", e );
+                    sendEmail(emailTo, subject, null, null, content, new EmailConfig(config));
+                } catch (Exception e) {
+                    Logger.error("Error on sending user has been registered email: ", e);
                 }
             });
             mailThread.start();
-        } catch ( Exception e ) {
-            Logger.error( "Error on sending user has been registered email: ", e );
+        } catch (Exception e) {
+            Logger.error("Error on sending user has been registered email: ", e);
         }
     }
 
@@ -495,23 +558,23 @@ public class EmailService {
             Config config = ConfigFactory.load();
 
             String subject = String.format("Your payment request status is changed!");
-            String emailBody = "Invoice #" +  paymentRequest.getId() + " is paid!<br/>" +
-                    "Amount: $" + (int)paymentRequest.getAmount() + "<br/>" +
+            String emailBody = "Invoice #" + paymentRequest.getId() + " is paid!<br/>" +
+                    "Amount: $" + (int) paymentRequest.getAmount() + "<br/>" +
                     "Due Date: " + dueDateFormat.format(new Date(paymentRequest.getDueDate())) + "<br/>" +
                     "Note: " + paymentRequest.getNote() + "<br/>";
 
-                    Thread mailThread = new Thread(() -> {
+            Thread mailThread = new Thread(() -> {
                 try {
                     String email = "support@makemydata.com";
 
-                    sendEmail(email, subject, emailBody, new EmailConfig(config) );
-                } catch ( Exception e ) {
-                    Logger.error( "Error on sending feedback email: ", e );
+                    sendEmail(email, subject, emailBody, new EmailConfig(config));
+                } catch (Exception e) {
+                    Logger.error("Error on sending feedback email: ", e);
                 }
             });
             mailThread.start();
-        } catch ( Exception e ) {
-            Logger.error( "Error on sending feedback email: ", e );
+        } catch (Exception e) {
+            Logger.error("Error on sending feedback email: ", e);
         }
     }
 }

@@ -145,17 +145,38 @@ public class Profile extends Controller {
 
     boolean test = false;
     public Result doPayment() {
+        System.out.println("sss");
         PaymentRequest paymentRequest = Json.fromJson( request().body().asJson(), PaymentRequest.class );
         User user = userDAO.findUserById( paymentRequest.getUserId() );
 
+        User reseller = userDAO.findUserById(user.getResellerId());
+        String requestHost = request().getHeader("Origin");
+        if (reseller != null && requestHost != null) {
+            requestHost = requestHost.
+                    replace("http://", "").
+                    replace("https://", "").
+                    replace("www.", "");
+
+            String domains = reseller.getDomains();
+            if (domains != null && domains.length() > 0) {
+                String[] domainArray = domains.split(",");
+                for (String domain : domainArray) {
+                    if (requestHost.equalsIgnoreCase(domain.trim())) {
+                        reseller.setDomains(domain.trim());
+                    }
+                }
+            }
+        }
+
+
         if (test) {
             userDAO.updateBalanceByUserId( user.getId(), user.getBalance() + paymentRequest.getAmount() );
-
             user = userDAO.findUserById( user.getId() );
             return ok( Json.toJson( Response.OK( String.valueOf( paymentRequest.getAmount() ), user ) ) );
         }
 
         if ("stripe".equals(paymentRequest.getType())) {
+            emailService.sendPaymentEmailtoUser(user.getEmail(), reseller);
             return processStripePayment(paymentRequest, user);
         } else {
             return processSquareUpPayment(paymentRequest, user);
