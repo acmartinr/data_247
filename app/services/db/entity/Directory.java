@@ -75,6 +75,7 @@ public class Directory {
     private Boolean dnc;
 
     private String data;
+    private Long date;
 
     private Integer phoneType;
 
@@ -239,6 +240,14 @@ public class Directory {
         } else {
             return COMPANY_NAME;
         }
+    }
+
+    public Long getDate() {
+        return date;
+    }
+
+    public void setDate(Long date) {
+        this.date = date;
     }
 
     public void setCOMPANY_NAME(String COMPANY_NAME) {

@@ -636,6 +636,7 @@ controller( 'DownloadColumnsModalController',
                 ];
 
                 $scope.optionalFields = [
+                    {name: 'Date', value: 'date'},
                     { name: 'phone type', value: 'phoneType' },
                     { name: 'DNC Info', value: 'dnc' },
                     { name: 'County', value: 'COUNTY' },

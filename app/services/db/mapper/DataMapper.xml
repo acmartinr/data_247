@@ -1128,7 +1128,7 @@
     </select>
 
     <select id="getDirectoryListByPurchasedList" resultType="Directory">
-        SELECT ${tableName}.id, data,ADDRESS,CITY,COMPANY_NAME,COUNTY,INDUSTRY,PHONE,phoneType,STATE,ST_CODE,WWW,ZIP,ZIP_CODE,AREA_CODE,dnc,contact_name,websites,email FROM ${tableName} JOIN purchasedUserListsItems ON
+        SELECT ${tableName}.id, ${tableName}.date,data,ADDRESS,CITY,COMPANY_NAME,COUNTY,INDUSTRY,PHONE,phoneType,STATE,ST_CODE,WWW,ZIP,ZIP_CODE,AREA_CODE,dnc,contact_name,websites,email FROM ${tableName} JOIN purchasedUserListsItems ON
             ${tableName}.id = purchasedUserListsItems.itemId WHERE purchasedUserListsItems.listId=#{listId}
         ORDER BY ${tableName}.id OFFSET #{offset} LIMIT #{limit}
     </select>
