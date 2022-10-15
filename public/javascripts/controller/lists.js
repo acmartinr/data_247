@@ -627,7 +627,6 @@ controller( 'DownloadColumnsModalController',
             } else if (type === 2){
                 $scope.requiredFields = [
                     { name: 'company name', value: 'COMPANY_NAME' },
-                    { name: 'contact name', value: 'contact_name' },
                     { name: 'address', value: 'ADDRESS' },
                     { name: 'city', value: 'CITY' },
                     { name: 'state', value: 'STATE' },
@@ -637,6 +636,7 @@ controller( 'DownloadColumnsModalController',
 
                 $scope.optionalFields = [
                     {name: 'Date', value: 'date'},
+                    { name: 'contact name', value: 'contact_name' },
                     { name: 'phone type', value: 'phoneType' },
                     { name: 'DNC Info', value: 'dnc' },
                     { name: 'County', value: 'COUNTY' },
@@ -906,7 +906,6 @@ controller( 'DownloadColumnsModalController',
                     { name: 'last name', value: 'PERSONLASTNAME' },
                     { name: 'email', value: 'EMAIL' },
                     { name: 'address', value: 'PRIMARYADDRESS' },
-                    { name: 'apt', value: 'SECONDARYADDRESS' },
                     { name: 'city', value: 'CITYNAME' },
                     { name: 'state', value: 'STATE' },
                     { name: 'zip', value: 'ZIPCODE' },
@@ -914,7 +913,9 @@ controller( 'DownloadColumnsModalController',
                 ];
 
                 $scope.optionalFields = [
+
                     { name: 'phone type', value: 'phoneType',type: 'type1'  },
+                    { name: 'apt', value: 'SECONDARYADDRESS' ,type: 'type1'},
                     // { name: 'Carrier Name', value: 'carrier_name',type: 'type1'  },
                     { name: 'Website', value: 'website',type: 'type1' },
                     { name: 'IP', value: 'ip',type: 'type1' },
