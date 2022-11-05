@@ -1,7 +1,6 @@
-angular.module('consumer_data_base').
-controller('DashboardController',
-    [ '$scope', '$document', '$stateParams', 'BASE_URL', 'systemService', 'cancelableDataService', 'localization', 'dataService', 'credentialsService', 'administrationService', 'toasty', '$timeout', '$modal', 'listService', 'alert', 'authService',
-        function($scope, $document, $stateParams, BASE_URL, systemService, cancelableDataService, localization, dataService, credentialsService, administrationService, toasty, $timeout, $modal, listService, alert, authService) {
+angular.module('consumer_data_base').controller('DashboardController',
+    ['$scope', '$document', '$stateParams', 'BASE_URL', 'systemService', 'cancelableDataService', 'localization', 'dataService', 'credentialsService', 'administrationService', 'toasty', '$timeout', '$modal', 'listService', 'alert', 'authService',
+        function ($scope, $document, $stateParams, BASE_URL, systemService, cancelableDataService, localization, dataService, credentialsService, administrationService, toasty, $timeout, $modal, listService, alert, authService) {
 
             $timeout(function () {
                 /*if (!credentialsService.getUser().verified) {
@@ -75,7 +74,6 @@ controller('DashboardController',
             $scope.isMatchBussiness2Enabled = false;
             $scope.isMatchEverydataEnabled = false;
             $scope.isMatchBussinessEnabled = false;
-
 
             $scope.isAdmin = function () {
                 return credentialsService.getUser().admin > 0;
@@ -239,11 +237,10 @@ controller('DashboardController',
                     /* deete this art*/
                     var tablesList = [];
 
-                    for(var i =0;i<$scope.tables.length;i++){
-                        if($scope.tables[i].name.indexOf("_Apr") == -1){
+                    for (var i = 0; i < $scope.tables.length; i++) {
+                        if ($scope.tables[i].name.indexOf("_Apr") == -1) {
                             tablesList.push($scope.tables[i]);
-                        }
-                        else{
+                        } else {
                             if ($scope.getAccauntName() == 'admin' || $scope.getAccauntName() == 'phil') {
                                 tablesList.push($scope.tables[i]);
                             }
@@ -259,11 +256,23 @@ controller('DashboardController',
             };
 
             $scope.resetKeyword = function () {
-                $scope.keywords = [{keywords: '', selectedColumns: {}}];
+                //Check if directory was selected for set fefaults param
+                if ($scope.dataType == "directory") {
+                    $scope.keywords = [{keywords: '', selectedColumns: {
+                            "industry|INDUSTRY":true,
+                            "company name|COMPANY_NAME":true
+                        }}];
+                } else {
+                    $scope.keywords = [{keywords: '', selectedColumns: {}}];
+                }
+
             }
 
             $scope.addKeyword = function () {
-                $scope.keywords.push({keyword: '', selectedColumns: {}});
+                $scope.keywords.push({keyword: '', selectedColumns: {
+                        "industry|INDUSTRY":true,
+                        "company name|COMPANY_NAME":true
+                    }});
             }
 
             $scope.removeKeyword = function (keyword) {
@@ -481,7 +490,16 @@ controller('DashboardController',
 
                 $scope.searchType = 'geographic';
 
-                $scope.keywords = [{keywords: '', selectedColumns: {}}];
+                //Cehck if directory was selected for check default values
+                if ($scope.dataType == "directory") {
+                    $scope.keywords = [{keywords: '', selectedColumns: {
+                            "industry|INDUSTRY":true,
+                            "company name|COMPANY_NAME":true
+                        }}];
+                } else {
+                    $scope.keywords = [{keywords: '', selectedColumns: {}}];
+                }
+
                 $scope.unique = true;
                 $scope.config.uniqueEmails = false;
                 var userRole = $scope.getAccauntName();
@@ -642,7 +660,7 @@ controller('DashboardController',
                 console.log('reset lock')
                 console.log($scope.lockSave)
 
-                if($scope.getAccauntName() == "admin" || $scope.getAccauntName() == "phil"){
+                if ($scope.getAccauntName() == "admin" || $scope.getAccauntName() == "phil") {
                     var modalInstance = $modal.open({
                         templateUrl: BASE_URL + '/assets/partials/modal/insert.note.html',
                         controller: 'InsertNoteModalController',
@@ -667,8 +685,7 @@ controller('DashboardController',
                             });
                         }
                     });
-                }
-                else{
+                } else {
                     var request = getRequest();
 
                     if ($scope.isRestricted && !$scope.checkRequest(request)) {
@@ -797,23 +814,23 @@ controller('DashboardController',
                 }
             */
                 var dataType = $scope.$root.types[$scope.dataType];
-                if(dataType != 6 && dataType != 0 && dataType != 9) {
+                if (dataType != 6 && dataType != 0 && dataType != 9) {
                     $scope.config.localNumbers = false;
                 }
                 //  console.log("code"+$scope.config.fbHispanicLNames);
-                $scope.currentJson =JSON.stringify( {
+                $scope.currentJson = JSON.stringify({
                     states: getValues($scope.asArray($scope.selectedStates)),
                     carriers: $scope.asArray($scope.selectedCarriers),
                     carriersPhones: getSelectedCarriersPhones(),
-                    consumerCarriers:$scope.asArray($scope.selectedConsumerCarrierName),
+                    consumerCarriers: $scope.asArray($scope.selectedConsumerCarrierName),
                     domainSources: $scope.asArray($scope.selectedDomainSource),
-                    facebookGenders:getValues($scope.asArray($scope.selectedFacebookGender)),
-                    facebookStatus:getValues($scope.asArray($scope.selectedFacebookStatus)),
+                    facebookGenders: getValues($scope.asArray($scope.selectedFacebookGender)),
+                    facebookStatus: getValues($scope.asArray($scope.selectedFacebookStatus)),
                     facebookJobs: $scope.asArray($scope.selectedFacebookJob),
-                    facebookHLName:$scope.asArray($scope.selectedFacebookHLastName),
+                    facebookHLName: $scope.asArray($scope.selectedFacebookHLastName),
                     carriersBrands: $scope.asArray($scope.selectedCarriersBrands),
                     'datime': getValues($scope.asArray($scope.selectedFileDates)),
-                    countNote:$scope.insertedNote,
+                    countNote: $scope.insertedNote,
                     omittedStates: getValues($scope.asArray($scope.omittedStates)),
                     cities: $scope.asArray($scope.selectedCities),
                     omittedCities: $scope.asArray($scope.omittedCities),
@@ -821,7 +838,7 @@ controller('DashboardController',
                     omittedZipCodes: $scope.asArray($scope.omittedZipCodes),
                     counties: $scope.asArray($scope.selectedCounties),
                     areaCodes: $scope.asArray($scope.selectedAreaCodes),
-                    stateAreacode:$scope.$root.areaState,
+                    stateAreacode: $scope.$root.areaState,
                     omittedAreaCodes: $scope.asArray($scope.omittedAreaCodes),
                     ages: getValues($scope.asArray($scope.selectedAges)),
                     agesRange: getValues($scope.asArray($scope.agesRange)),
@@ -959,15 +976,15 @@ controller('DashboardController',
                     states: getValues($scope.asArray($scope.selectedStates)),
                     carriers: $scope.asArray($scope.selectedCarriers),
                     carriersPhones: getSelectedCarriersPhones(),
-                    consumerCarriers:$scope.asArray($scope.selectedConsumerCarrierName),
+                    consumerCarriers: $scope.asArray($scope.selectedConsumerCarrierName),
                     domainSources: $scope.asArray($scope.selectedDomainSource),
-                    facebookGenders:getValues($scope.asArray($scope.selectedFacebookGender)),
-                    facebookStatus:getValues($scope.asArray($scope.selectedFacebookStatus)),
+                    facebookGenders: getValues($scope.asArray($scope.selectedFacebookGender)),
+                    facebookStatus: getValues($scope.asArray($scope.selectedFacebookStatus)),
                     facebookJobs: $scope.asArray($scope.selectedFacebookJob),
-                    facebookHLName:$scope.asArray($scope.selectedFacebookHLastName),
+                    facebookHLName: $scope.asArray($scope.selectedFacebookHLastName),
                     carriersBrands: $scope.asArray($scope.selectedCarriersBrands),
                     'datime': getValues($scope.asArray($scope.selectedFileDates)),
-                    countNote:$scope.insertedNote,
+                    countNote: $scope.insertedNote,
                     omittedStates: getValues($scope.asArray($scope.omittedStates)),
                     cities: $scope.asArray($scope.selectedCities),
                     omittedCities: $scope.asArray($scope.omittedCities),
@@ -975,7 +992,7 @@ controller('DashboardController',
                     omittedZipCodes: $scope.asArray($scope.omittedZipCodes),
                     counties: $scope.asArray($scope.selectedCounties),
                     areaCodes: $scope.asArray($scope.selectedAreaCodes),
-                    stateAreacode:$scope.$root.areaState,
+                    stateAreacode: $scope.$root.areaState,
                     omittedAreaCodes: $scope.asArray($scope.omittedAreaCodes),
                     ages: getValues($scope.asArray($scope.selectedAges)),
                     agesRange: getValues($scope.asArray($scope.agesRange)),
@@ -1268,9 +1285,9 @@ controller('DashboardController',
                 });
                 modalInstance.result.then(function (name) {
                     var type = $scope.$root.types[$scope.dataType];
-                    var sameJson = isEqualsJson($scope.currentJson, JSON.stringify(getRequest()) );
+                    var sameJson = isEqualsJson($scope.currentJson, JSON.stringify(getRequest()));
 
-                    if(sameJson == true && $scope.lockSave == false) {
+                    if (sameJson == true && $scope.lockSave == false) {
                         console.log("Json is the same");
                         $scope.lockSave = false;
                         var request = {
@@ -1300,7 +1317,7 @@ controller('DashboardController',
                                 });
                             }
                         })
-                    }else{
+                    } else {
                         $scope.lockSave = true;
                         toasty.error({
                             title: "Make get count again before save list",
@@ -1313,12 +1330,12 @@ controller('DashboardController',
                 });
             }
 
-            var isEqualsJson = (obj1,obj2)=>{
+            var isEqualsJson = (obj1, obj2) => {
                 keys1 = Object.keys(obj1);
                 keys2 = Object.keys(obj2);
 
                 //return true when the two json has same length and all the properties has same value key by key
-                return keys1.length === keys2.length && Object.keys(obj1).every(key=>obj1[key]==obj2[key]);
+                return keys1.length === keys2.length && Object.keys(obj1).every(key => obj1[key] == obj2[key]);
             }
 
             $scope.saveList = function () {
@@ -1330,9 +1347,9 @@ controller('DashboardController',
                 modalInstance.result.then(function (name) {
                     var type = $scope.$root.types[$scope.dataType];
 
-                    var sameJson = isEqualsJson($scope.currentJson, JSON.stringify(getRequest()) );
+                    var sameJson = isEqualsJson($scope.currentJson, JSON.stringify(getRequest()));
 
-                    if(sameJson == true && $scope.lockSave == false){
+                    if (sameJson == true && $scope.lockSave == false) {
                         $scope.lockSave = false;
                         console.log("Json is the same");
                         var request = {
@@ -1362,7 +1379,7 @@ controller('DashboardController',
                                 });
                             }
                         })
-                    }else{
+                    } else {
                         $scope.lockSave = true;
                         toasty.error({
                             title: "Make get count again before save list",
@@ -1371,7 +1388,6 @@ controller('DashboardController',
                             sound: false
                         });
                     }
-
 
 
                 });
@@ -1568,8 +1584,8 @@ controller('DashboardController',
             }
             handleNextRequest();
         }]).controller('SaveListTxtCountModalController',
-    ['$scope', '$modalInstance','txtCount',
-        function ($scope, $modalInstance,txtCount) {
+    ['$scope', '$modalInstance', 'txtCount',
+        function ($scope, $modalInstance, txtCount) {
             $scope.name = txtCount;
             $scope.close = function () {
                 $modalInstance.dismiss();
