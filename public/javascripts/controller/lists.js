@@ -632,6 +632,7 @@ controller( 'DownloadColumnsModalController',
                     { name: 'state', value: 'STATE' },
                     { name: 'zip', value: 'ZIP' },
                     { name: 'phone', value: 'PHONE' },
+                    { name: 'Industry', value: 'INDUSTRY' },
                 ];
 
                 $scope.optionalFields = [
@@ -642,7 +643,6 @@ controller( 'DownloadColumnsModalController',
                     { name: 'County', value: 'COUNTY' },
                     { name: 'Area Code', value: 'AREA_CODE' },
                     { name: 'Source', value: 'WWW' },
-                    { name: 'Industry', value: 'INDUSTRY' },
                     { name: 'Website', value: 'websites' }
                 ];
             } else if (type === 22){
