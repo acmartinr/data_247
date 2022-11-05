@@ -854,7 +854,9 @@
         <if test='isFbHispanicLName and tableName.contains("HealthInsuranceLeads")' >
             AND LOWER(${tableName}.lastname) in (select distinct LOWER(lastname) from fb_hispanic_last_name)
         </if>
-
+        <if test='tableName.contains("DirectoryOriginal") or tableName.contains("DirectoryMobile") or tableName.contains("DirectoryLandlines")' >
+            AND date > 1604007852000
+        </if>
         <!--
         <if test='isFbHispanicLName and !tableName.contains("FacebookMobile")' >
             AND LOWER(${tableName}.lastname) in (select distinct LOWER(lastname) from fb_hispanic_last_name)
