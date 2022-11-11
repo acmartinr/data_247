@@ -104,6 +104,12 @@
                                 localized>profile.profile</button>
                     </div>
 
+                    <div class='form-group' ng-if='!isPaymentAvailable()'>
+                        <br>
+                        <span class='list_size_error'>This is for new users that do not have a payment button:  Add a red note that says "Call 714-406-0000 to Enable Payments.</span>
+                        <br>
+                    </div>
+
                     <div class='center margin-top'>
                         <label localized>profile.change.password</label>
                     </div>
