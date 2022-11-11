@@ -1751,7 +1751,7 @@ controller( 'BuyListModalController',
                 $modalInstance.dismiss();
             }
 
-            $scope.maxListSize = 10;
+            $scope.maxListSize = 1000000;
             $scope.showErrorMessage = false;
             $scope.checkListSize = function() {
                 return $scope.showErrorMessage;
