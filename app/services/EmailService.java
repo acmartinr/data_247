@@ -29,6 +29,7 @@ import views.html.email.campaign;
 
 import java.net.URLEncoder;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -322,7 +323,7 @@ public class EmailService {
 
     }
 
-    public void sendPaymentEmailtoUser(String email, User reseller) {
+    public void sendPaymentEmailtoUser(String email, User reseller,float paymentAmount) {
         try {
             Config config = ConfigFactory.load();
 
@@ -356,8 +357,14 @@ public class EmailService {
             }
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
             LocalDateTime now = LocalDateTime.now();
+            String emailDomainPart = "";
 
-            String title = "You just made a payment to " + adminEmail+"\n"+"Date: "+dtf.format(now);
+            DecimalFormat df = new DecimalFormat("#.00");
+
+            if(adminEmail.split("@").length > 1){
+                emailDomainPart = adminEmail.split("@")[1];
+            }
+            String title = "You just made a payment of $"+ df.format(paymentAmount/1.00).replace(',','.')+" to " + emailDomainPart +"\n"+"Date: "+dtf.format(now);
 
             EmailConfig emailConfig = new EmailConfig(config);
 

@@ -143,7 +143,7 @@ public class Profile extends Controller {
         return ok(Json.toJson(Response.OK()));
     }
 
-    boolean test = false;
+
     public Result doPayment() {
         System.out.println("sss");
         PaymentRequest paymentRequest = Json.fromJson( request().body().asJson(), PaymentRequest.class );
@@ -168,15 +168,14 @@ public class Profile extends Controller {
             }
         }
 
-
-        if (test) {
+        if (false) {
             userDAO.updateBalanceByUserId( user.getId(), user.getBalance() + paymentRequest.getAmount() );
             user = userDAO.findUserById( user.getId() );
             return ok( Json.toJson( Response.OK( String.valueOf( paymentRequest.getAmount() ), user ) ) );
         }
 
         if ("stripe".equals(paymentRequest.getType())) {
-            emailService.sendPaymentEmailtoUser(user.getEmail(), reseller);
+            emailService.sendPaymentEmailtoUser(user.getEmail(), reseller,paymentRequest.getAmount());
             return processStripePayment(paymentRequest, user);
         } else {
             return processSquareUpPayment(paymentRequest, user);
