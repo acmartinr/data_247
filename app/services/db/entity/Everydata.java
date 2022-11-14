@@ -94,6 +94,15 @@ public class Everydata {
     @JsonProperty("last_name")
     private String lastname;
 
+    @JsonProperty("company_name")
+    private String companyName;
+
+    @JsonProperty("address")
+    private String address;
+
+    @JsonProperty("zip")
+    private String zip;
+
     @JsonProperty("source")
     private String source;
 
@@ -243,4 +252,33 @@ public class Everydata {
     public void setEmail(String email) {
         this.email = email;
     }
+
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+
+
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
 }
