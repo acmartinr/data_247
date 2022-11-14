@@ -681,7 +681,10 @@ controller( 'DownloadColumnsModalController',
                     { name: 'Last Name', value: 'lastname' },
                     { name: 'Email', value: 'email' },
                     { name: 'DOB', value: 'dob' },
-                    { name: 'Source', value: 'source' }
+                    { name: 'Source', value: 'source' },
+                    { name: 'Company Name', value: 'companyName' },
+                    { name: 'Address', value: 'address' },
+                    { name: 'Zip', value: 'zip' }
                 ];
             }   else if (type === 3) {
                 $scope.requiredFields = [
