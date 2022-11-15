@@ -682,7 +682,7 @@ controller( 'DownloadColumnsModalController',
                     { name: 'Email', value: 'email' },
                     { name: 'DOB', value: 'dob' },
                     { name: 'Source', value: 'source' },
-                    { name: 'Company Name', value: 'companyName' },
+                    { name: 'Company Name', value: 'companyname' },
                     { name: 'Address', value: 'address' },
                     { name: 'Zip', value: 'zip' }
                 ];

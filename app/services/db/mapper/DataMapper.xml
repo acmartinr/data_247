@@ -74,11 +74,11 @@
 
     <insert id="insertEverydata">
         INSERT INTO
-        ${tableName}(company_name,address,zip,email,source,firstname,lastname,city,state,ST_CODE,county,PHONE,dob,hash,AREA_CODE,dnc,phoneType,data)
+        ${tableName}(companyname,address,zip,email,source,firstname,lastname,city,state,ST_CODE,county,PHONE,dob,hash,AREA_CODE,dnc,phoneType,data)
         VALUES
         <foreach item="item" index="index" collection="everyDataList"
                  open="" separator="," close="">
-            ('${item.companyName}','${item.address}','${item.zip}','${item.email}','${item.source}','${item.firstname}','${item.lastname}','${item.CITY}','${item.STATE}','${item.ST_CODE}','${item.COUNTY}','${item.PHONE}',${item.dobDate},MD5(CONCAT('${item.companyName}','${item.address}','${item.zip}','${item.email}','${item.source}','${item.firstname}','${item.lastname}','${item.CITY}','${item.STATE}','${item.ST_CODE}','${item.COUNTY}','${item.PHONE}',${item.dobDate})),'${item.AREA_CODE}','${item.dnc}','${item.phoneType}','${item.data}')
+            ('${item.companyname}','${item.address}','${item.zip}','${item.email}','${item.source}','${item.firstname}','${item.lastname}','${item.CITY}','${item.STATE}','${item.ST_CODE}','${item.COUNTY}','${item.PHONE}',${item.dobDate},MD5(CONCAT('${item.companyname}','${item.address}','${item.zip}','${item.email}','${item.source}','${item.firstname}','${item.lastname}','${item.CITY}','${item.STATE}','${item.ST_CODE}','${item.COUNTY}','${item.PHONE}',${item.dobDate})),'${item.AREA_CODE}','${item.dnc}','${item.phoneType}','${item.data}')
         </foreach>
     </insert>
 
@@ -1138,7 +1138,7 @@
         ORDER BY ${tableName}.id OFFSET #{offset} LIMIT #{limit}
     </select>
     <select id="getEverydataListByPurchasedList" resultType="Everydata">
-        SELECT ${tableName}.id,email,firstname,lastname,source,dob,phone,address,company_name,zip,phonetype,STATE,ST_CODE,COUNTY,CITY,dnc,AREA_CODE FROM ${tableName} JOIN purchasedUserListsItems ON
+        SELECT ${tableName}.id,email,firstname,lastname,source,dob,phone,address,companyname,zip,phonetype,STATE,ST_CODE,COUNTY,CITY,dnc,AREA_CODE FROM ${tableName} JOIN purchasedUserListsItems ON
             ${tableName}.id = purchasedUserListsItems.itemId WHERE purchasedUserListsItems.listId=#{listId}
         ORDER BY ${tableName}.id OFFSET #{offset} LIMIT #{limit}
     </select>
